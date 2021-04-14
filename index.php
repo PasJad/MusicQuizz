@@ -1,4 +1,6 @@
 <?php session_start();?>
-<?php include "./views/games/accueil.php";?>
+<?php require_once("./env.php");?>
+<?php include "./views/games/game.php";?>
+
 
 <?php ?>

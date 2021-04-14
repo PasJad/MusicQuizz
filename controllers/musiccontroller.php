@@ -1,5 +1,5 @@
 <?php
-class Controller
+class ControllerMusic
 {
     function show()
     {
@@ -18,3 +18,4 @@ class Controller
 
     }
 }
+?>
