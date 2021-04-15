@@ -11,7 +11,7 @@ class Users
      * @param [type] $statutUser
      * @return void
      */
-    public function add($pseudoUser,$mailUser,$mdpUser,$statutUser)
+    public function add($pseudoUser, $mailUser, $mdpUser, $statutUser)
     {
         // Init
         static $ps = null;
@@ -28,10 +28,10 @@ class Users
             $ps->bindParam(':statutUser', $statutUser);
             $flag = $ps->execute();
         } catch (PDOException $e) {
-            $flag = false;
+            $flag = true;
             $codeErreur = $e->getCode();
             if ($codeErreur == 23000) {
-            echo '<script>alert("Ce compte est déjà existant")</script>';
+                echo '<script>alert("Ce compte est déjà existant")</script>';
             }
         }
         // Output
@@ -51,4 +51,44 @@ class Users
             return null;
         }
     }
+
+    public function getUserPswdByMail($mailUser)
+    {
+        // Init
+        static $ps = null;
+        $sql = 'SELECT Mdp from users where Email = :mailUser';
+        $flag = false;
+        // Process
+        if ($ps === null) {
+            $ps = Database::getPDO()->prepare($sql);
+        }
+        try {
+            $ps->bindParam(':mailUser', $mailUser);
+            $ps->execute();
+            return $ps->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function getUserByMail($mailUser)
+    {
+        // Init
+        static $ps = null;
+        $sql = 'select * from users where Email = :mailUser';
+        $flag = false;
+        // Process
+        if ($ps === null) {
+            $ps = Database::getPDO()->prepare($sql);
+        }
+        try {
+            $ps->bindParam(':mailUser', $mailUser);
+            $ps->execute();
+            return $ps->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+
+
 }

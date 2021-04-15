@@ -1,4 +1,5 @@
 <?php
+require_once("./env.php");
 class Database
 {
     private static $pdo = null;

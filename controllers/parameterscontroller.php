@@ -1,5 +1,6 @@
 <?php
 require_once("./models/parametres.php");
+require_once("./views/games/accueil.php");
 class ControllerParameters
 {
 
@@ -16,12 +17,7 @@ class ControllerParameters
     }
     public function create()
     {
-        if (isset($_POST["NomParametre"])) {
-            require("./models/parametres.php");
-
-            if ($mParam->add($_POST["NomParametre"])) {
-                header("Location: " . "../views/games/game.php");
-            }
+        if ($this->mParam->add($_POST["NomParametre"])) {
         }
     }
     function edit()

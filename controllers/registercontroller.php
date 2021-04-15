@@ -1,5 +1,25 @@
 <?php
 require_once("./models/users.php");
+require_once("./views/games/register.php");
+require_once("./controllers/registercontroller.php");
+if (isset($_SESSION["User"])) {
+    header("Location: ./index.php?uc=accueil");
+    exit();
+}
+
+$submit = filter_input(INPUT_POST, 'submitRegister', FILTER_SANITIZE_STRING);
+    $pseudo = filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_STRING);
+    $mail = filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_EMAIL);
+    $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
+    $ctrlr = new ControllerRegister();
+
+if (isset($submit)) {
+    
+    if (!empty($pseudo) && !empty($mail) && !empty($mdp)) {
+        $ctrlr->create($pseudo, $mail, $mdp, 0);
+    }
+}
+
 class ControllerRegister
 {
 
@@ -12,7 +32,8 @@ class ControllerRegister
 
     public function show()
     {
-        //TODO Montrer tout les utilisateurs 
+        //TODO Montrer tout les utilisateurs
+
 
     }
 
@@ -25,12 +46,11 @@ class ControllerRegister
      * @param [type] $pStatut
      * @return void
      */
-    public function create($pPseudo, $pMail,$pMdp,$pStatut)
+    public function create($pPseudo, $pMail, $pMdp, $pStatut)
     {   // ? Peut-être que le Hashage n'est pas bien placé
-        $hpswd = password_hash($pMdp,PASSWORD_DEFAULT);
-        if ($this->mUser->add($pPseudo,$pMail,$hpswd,$pStatut)) 
-        {
-            header("Location: " . "../views/games/game.php");
+        $hpswd = password_hash($pMdp, PASSWORD_DEFAULT);
+        if ($this->mUser->add($pPseudo, $pMail, $hpswd, $pStatut)) {
+            header("Location: " . "../games/game.php");
         }
     }
     function edit()
@@ -39,9 +59,10 @@ class ControllerRegister
     function delete()
     {
     }
+
     /**
      * Get the value of mUser
-     */ 
+     */
     public function getMUser()
     {
         return $this->mUser;
@@ -51,7 +72,7 @@ class ControllerRegister
      * Set the value of mUser
      *
      * @return  self
-     */ 
+     */
     public function setMUser($mUser)
     {
         $this->mUser = $mUser;
