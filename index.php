@@ -1,8 +1,8 @@
 <?php session_start(); ?>
 <?php
 require_once("./env.php");
-$uc = filter_input(INPUT_GET,'uc');
-$action = filter_input(INPUT_GET,'action');
+$uc = filter_input(INPUT_GET, 'uc');
+$action = filter_input(INPUT_GET, 'action');
 
 switch ($uc) {
     default:
@@ -20,6 +20,8 @@ switch ($uc) {
     case 'game':
         // TODO require_once("./views/games/game.php");
         break;
-}
-
+    case 'media':
+        require_once("./controllers/musiccontroller.php");
+        break;
+    }
 ?>

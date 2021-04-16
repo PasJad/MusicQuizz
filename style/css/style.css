@@ -25,11 +25,11 @@
 }
 
 body {
-  background: linear-gradient(to top right, #2e0053, #1a002e);
+  background: linear-gradient(to top right, #030005, #9000ff);
   font-family: "Poppins", sans-serif;
   height: 100vh;
   background-size: 200% 200%;
-  animation: gradient 15s ease infinite;
+  animation: gradient 5s ease infinite;
 }
 
 .mainform {
@@ -42,13 +42,24 @@ body {
   height: 530px;
 }
 
+#mediaForm{
+  position: relative;
+  top: 20%;
+  margin: auto;
+  background-color: white;
+  border-radius: 10px;
+  width: 24%;
+  height: 630px;
+}
+
 input[type='range']{
-  width : 50%;
+  width : 100%;
   -webkit-appearance: none;
-  overflow: hidden;
   outline: none;
   background: linear-gradient(90deg, #6700CD 50%, rgba(128, 0, 255, 0) 105.75%, #2e0053 105.75%);
+  height: 15px;
   border-radius: 30px;
+  margin-top: 3%;
 }
 input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -56,7 +67,7 @@ input[type='range']::-webkit-slider-thumb {
   width: 25px;
   height: 25px;
   border-radius: 50%; 
-  border: 1px white solid;
+  border: 3px white solid;
   background: #6700CD;
   cursor: pointer;
 }
@@ -91,6 +102,11 @@ input[type='range']::-moz-range-thumb {
   right: 1%;
   
 }
+.sec23{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
 .profilbutton .deconnexion{
   visibility: hidden;
@@ -123,10 +139,11 @@ input[type='range']::-moz-range-thumb {
   width: 60%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  font-weight: 500;
+  font-weight: 400;
   font-size: xx-large;
   padding-left: 5%;
+  padding-right: 5%;
+  justify-content: space-evenly;
 }
 
 #jouer{
@@ -137,8 +154,8 @@ select{
   background-color: white;
   font-family: Poppins;
   font-size: xx-large;
+  font-weight: 500;
 }
-
 
 .gameform {
   display: flex;
@@ -153,6 +170,47 @@ select{
   height: 600px;
   margin-top: 5%;
 }
+.champsContainer{
+  display: flex;
+  flex-direction: row;
+  height: 10%;
+  border-radius: 10px;
+  align-items: center;
+  background-color: #F4F4F4;
+  padding: 6px;
+  margin: 1%;
+  font-family: Poppins;
+}
+.champsContainer * {
+  border-radius: 10px;
+  height: 90%;
+  width: 100%;
+}
+#btnNew{
+  position: absolute;
+  bottom: -5%;
+  right: 0;
+}
+input[type="file"]{
+  appearance: none;
+  background: white;
+  outline: none;
+  border: 3px solid white;
+}
+
+.mediaContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  position: relative;
+  margin: auto;
+  background-color: white;
+  border-radius: 10px;
+  width: 65%;
+  height: 600px;
+  margin-top: 5%;
+}
+
 .formParam {
   display: flex;
   flex-direction: row;
@@ -170,6 +228,9 @@ select{
   border-radius: 10px;
   width: 24%;
   height: 445px;
+}
+.champ{
+
 }
 
 .mainform form #input1 {
@@ -193,6 +254,10 @@ select{
   font-size: x-large;
   top: 25px;
   margin-top: 10px;
+}
+
+#descArea{
+  height: 42%;
 }
 
 .mainform form #inscrire {
@@ -243,4 +308,20 @@ select{
   top: 5px;
   font-weight: 500;
   margin-bottom: 20px;
+}
+
+/* Bout de code CSS récupérer sur StackOverflow pour mettre des radio boutons carré 
+ * https://stackoverflow.com/questions/24516958/styling-radio-buttons-into-a-square#24517881
+ */
+input[type='radio'] {
+  appearance: none;
+  background: white;
+  outline: none;
+  border: 3px solid white;
+  width: 25px;
+  height: 25px;
+}
+
+input[type='radio']:checked {
+  background: black;
 }

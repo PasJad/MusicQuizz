@@ -54,11 +54,16 @@ class ControllerLogin
     {
         //Récupère le mot de passe hashé dans la base de données
         $hashedpwd = $this->mUser->getUserPswdByMail($pMail);
-        //Vérifie que le mot de passe entré et celui associé au mail dans la base soit le même
-        if (password_verify($pMdp, $hashedpwd['Mdp'])) {
-            //Créer une session User
-            $_SESSION["User"] = $this->mUser->getUserByMail($pMail);
+        if (empty($hashedpwd)) {
+            echo '<script>alert("Compte Inexistant")</script>';
         } else {
+            //Vérifie que le mot de passe entré et celui associé au mail dans la base soit le même
+            if (password_verify($pMdp, $hashedpwd['Mdp'])) {
+                //Créer une session User
+                $_SESSION["User"] = $this->mUser->getUserByMail($pMail);
+            } else {
+                echo '<script>alert("Information erroné")</script>';
+            }
         }
     }
     public function Deconnexion()
