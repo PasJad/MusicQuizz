@@ -3,3 +3,7 @@ function UpdateSlider(val) {
     var temps = document.getElementById('sec2');
     temps.innerHTML = val + " secondes";
 }
+
+function UpdateVolume(val) {
+    var slider = document.getElementById('volume');
+}

@@ -3,6 +3,7 @@
 require_once("./env.php");
 $uc = filter_input(INPUT_GET, 'uc');
 $action = filter_input(INPUT_GET, 'action');
+$id = filter_input(INPUT_GET, 'id');
 
 switch ($uc) {
     default:
@@ -17,11 +18,10 @@ switch ($uc) {
     case 'login':
         require_once("./controllers/logincontroller.php");
         break;
-    case 'game':
-        // TODO require_once("./views/games/game.php");
-        break;
     case 'media':
         require_once("./controllers/musiccontroller.php");
         break;
+    case 'game':
+        require_once("./controllers/gamecontroller.php");
     }
 ?>

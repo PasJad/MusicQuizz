@@ -8,7 +8,7 @@
 
 <body>
   <div class="gameform">
-    <form action="" method="post" class="formParam">
+    <form action="index.php?uc=game&action=start" method="post" class="formParam">
       <div class="paramContainer">
         <div>
           <div>

@@ -1,6 +1,15 @@
 <?php
 require_once("./models/parametres.php");
-require_once("./views/games/accueil.php");
+
+if (!isset($_SESSION["User"])) {
+    header("Location: ./index.php?uc=login");
+    exit();
+} else {
+    require_once("./views/games/accueil.php");
+}
+
+
+
 class ControllerParameters
 {
 

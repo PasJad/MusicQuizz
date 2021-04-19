@@ -14,13 +14,15 @@
                 <?php
                 for ($i = 0; $i < count($mesTitres); $i++) {
                     echo "<div class='champsContainer'>";
-                    echo "<div id='" . $mesTitres[$i]['IdMusique'] . "'" . ">" . $mesTitres[$i]['IdMusique'] . "</div>";
-                    echo "<div id='" . $mesTitres[$i]['IdMusique'] . "'" . ">" . $mesTitres[$i]['TitreMusique'] . "</div>";
-                    echo "<div id='" . $mesTitres[$i]['IdMusique'] . "'" . ">" . $mesTitres[$i]['Description'] . "</div>";
+                    echo "<div class='champ' id='" . $mesTitres[$i]['IdMusique'] . "'" . ">" . $mesTitres[$i]['IdMusique'] . "</div>";
+                    echo "<div class='champ' id='" . $mesTitres[$i]['IdMusique'] . "'" . ">" . $mesTitres[$i]['TitreMusique'] . "</div>";
+                    echo "<div class='champ' id='" . "champDescription" . "'" . ">" . $mesTitres[$i]['Description'] . "</div>";
                     echo "<audio controls>";
-                    echo "<source id='" . $mesTitres[$i]['IdMusique'] . "'" . "src='". $mesTitres[$i]['Musique'] . "'>";
+                    echo "<source id='" . $mesTitres[$i]['IdMusique'] . "'" . "src='". $mesTitres[$i]['Musique'] . "' width='400px'>";
                     echo "</audio>";
                     echo "<img id='" . $mesTitres[$i]['IdMusique'] . "'" . "src='" . $mesTitres[$i]['ImagePochette'] . "' width='60%' height='60%'>";
+                    echo "<a class='champ' id='BtnEdit' href='index.php?uc=media&action=edit&id=" . $mesTitres[$i]['IdMusique'] . "'>Edit</a>";
+                    echo "<a class='champ' id='BtnDelete' href='index.php?uc=media&action=delete&id=" . $mesTitres[$i]['IdMusique'] . "'>Delete</a>";
                     echo "</div>";
                 }
                 ?>
