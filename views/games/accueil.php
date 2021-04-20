@@ -27,21 +27,27 @@
         </div>
         <br>
         <div class="choixType">
-          
-          <input type="radio" id="chant" name="type" value="chant"> <label for="chant">Chant</label> 
+          <input type="radio" id="chant" name="type" value="chant" selected=""> <label for="chant">Chant</label> 
           <br>
           <input type="radio" id="image" name="type" value="image"> <label for="image">Image</label>
         </div>
 
 
       </div>
+      <div class="score-play">
+        Vous avez eu un score de : <?=$score?> <br> 
       <input type="submit" id="jouer" value="Lancer la partie" name="submitPlay">
+     </div>
+      
+      
       <div name="profil" value="" class="profilbutton" onclick="location.href='index.php?uc=profil'"> <?= $_SESSION['User']['0']['Pseudo'] ?>
         <a href="index.php?uc=login&action=deconnexion" name="deconnexion" value="Déconnexion" class="deconnexion">Déconnexion</a>
       </div>
     </form>
   </div>
 
-</body>
+<script>
 
+</script>
+</body>
 </html>

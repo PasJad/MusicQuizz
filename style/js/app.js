@@ -5,5 +5,11 @@ function UpdateSlider(val) {
 }
 
 function UpdateVolume(val) {
-    var slider = document.getElementById('volume');
+    var audio = document.getElementById('player');
+    audio.volume = val/100;
+    console.log(audio.volume);
+}
+
+function NextMusic() {
+    document.getElementById('formGame').submit();
 }

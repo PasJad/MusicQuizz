@@ -193,7 +193,7 @@ class ControllerMusic
         if ($fileMusic['size'][0] > MAX_FILESIZE_AUDIO) {
             $sizeOk = false;
         }
-        if ($fileImage['size'][0] > MAX_FILESIZE_AUDIO) {
+        if ($fileImage['size'][0] > MAX_FILESIZE_IMAGE) {
             $sizeOk = false;
         }
         return $sizeOk;

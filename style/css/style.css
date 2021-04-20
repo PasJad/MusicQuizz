@@ -80,9 +80,15 @@ input[type='range']::-moz-range-thumb {
   border: 1px white solid;
   cursor: pointer;
 }
-
-
-
+.slider-img{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.score-play {
+  width: 100%;
+  margin-left: 5%;
+}
 .profilbutton{
   position: absolute;
   background: black;
@@ -153,7 +159,7 @@ input[type='range']::-moz-range-thumb {
   font-weight: 400;
   font-style: italic;
   font-size: xx-large;
-  width: 25%;
+  width: 60%;
   height: 12%;
 }
 .profilbutton:hover .deconnexion{
@@ -170,7 +176,7 @@ input[type='range']::-moz-range-thumb {
   border-radius: 10px;
   color: white;
   height: 100%;
-  width: 60%;
+  width: 110%;
   display: flex;
   flex-direction: column;
   font-weight: 400;
@@ -178,6 +184,7 @@ input[type='range']::-moz-range-thumb {
   padding-left: 5%;
   padding-right: 5%;
   justify-content: space-evenly;
+  margin-left: 5%;
 }
 
 
@@ -246,9 +253,9 @@ select{
   font-weight: 600;
   font-size: xx-large;
   position: absolute;
-  bottom: -8%;
+  bottom: 17%;
   border-radius: 10px;
-  right: 0;
+  right: 17.5%;
 }
 #champDescription{
   overflow: hidden;
@@ -272,6 +279,7 @@ input[type="file"]{
   width: 65%;
   height: 600px;
   margin-top: 5%;
+  overflow-y: scroll;
 }
 
 .formParam {

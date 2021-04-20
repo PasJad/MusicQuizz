@@ -1,5 +1,18 @@
 <?php
 require_once("./models/parametres.php");
+$score = 0;
+
+
+if ($action == "score") {
+    if (!isset($_SESSION['User']['Score'])) {
+        $score = 12;
+    }
+    else{
+        
+        $score = $_SESSION['User']['Score'];
+    }
+    
+}
 
 if (!isset($_SESSION["User"])) {
     header("Location: ./index.php?uc=login");
@@ -7,6 +20,7 @@ if (!isset($_SESSION["User"])) {
 } else {
     require_once("./views/games/accueil.php");
 }
+
 
 
 

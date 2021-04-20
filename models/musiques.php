@@ -51,6 +51,20 @@ class Musiques
         }
     }
 
+    public function getNumberOfMusique()
+    {
+        // Init
+        $sql = "SELECT COUNT(*) FROM musiques";
+        $ps = Database::getPDO()->query($sql);
+        // Process
+        try {
+            $ps->execute();
+            return $ps->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
     public function UpdateMusique($titre, $desc, $mediasMusiques, $mediasImages, $type,$idEditMusique)
     {
         // Init

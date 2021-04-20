@@ -7,21 +7,23 @@
     <script src="../../style/js/app.js"></script>
 </head>
 
-<body>
+<body onload="setTimeout(NextMusic,<?=$_SESSION['game']['timerMS'] * 10?>)">
     <div class="gameform">
-        <div class="headband">Quel est cette musique ? : 1/10</div>
-        <form action="index.php?uc=game&action=next" method="post" class="formParam">
-        <audio id="player" src="sound.mp3"></audio>
+        <div class="headband">Quel est cette musique ? : <?=$_SESSION['game']['nbStep']?>/10</div>
+        <form id='formGame' action="index.php?uc=game&action=next" method="post" class="formParam">
             <div class="paramContainer">
-            <input id="volume" type="range" min="1" max="100" value="30" id="myNumber">
+                <div class="slider-img">
+                    <input id="volume" type="range" min="1" max="100" value="30" id="myNumber" oninput="UpdateVolume(this.value)">
+                    <?=$aDeviner?>
+                </div>
                 <div class="choixType">
-                    <input type="radio" id="chant" name="type" value="chant"> <label for="chant"><?=$titres?></label>
+                    <input type="radio" id="1" name="reponses" <?='value="' . $titres[0][0]['IdMusique']  . '"' ?> name="type" value="chant"> <label for="1"><?=$titres[0][0]['TitreMusique']?></label>
                     <br>
-                    <input type="radio" id="image" name="type" value="image"> <label for="image"><?=$titres?></label>
+                    <input type="radio" id="2" name="reponses" <?='value="' . $titres[1][0]['IdMusique']  . '"' ?>> <label for="2"><?=$titres[1][0]['TitreMusique']?></label>
                     <br>
-                    <input type="radio" id="chant" name="type" value="chant"> <label for="chant"><?=$titres?></label>
+                    <input type="radio" id="3" name="reponses" <?='value="' . $titres[2][0]['IdMusique']  . '"' ?>> <label for="3"><?=$titres[2][0]['TitreMusique']?></label>
                     <br>
-                    <input type="radio" id="image" name="type" value="image"> <label for="image"><?=$titres?></label>
+                    <input type="radio" id="4" name="reponses" <?='value="' . $titres[3][0]['IdMusique']  . '"' ?>> <label for="4"><?=$titres[3][0]['TitreMusique']?></label>
                     <br>
                 </div>
             </div>

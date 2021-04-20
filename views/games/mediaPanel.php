@@ -27,8 +27,9 @@
                 }
                 ?>
 
-            <input type="submit" name="create" value="Nouveau!" id="btnNew">
         </div>
+        
+        <input type="submit" name="create" value="Nouveau!" id="btnNew">
     </form>
 
 </body>
