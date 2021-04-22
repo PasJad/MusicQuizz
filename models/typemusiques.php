@@ -3,30 +3,23 @@ require_once("./config/db.php");
 class Types
 {
     /**
-     * Undocumented function
+     * Fonction qui à l'aide d'une requête sql vas ajouter un nouveau type dans ma table
      *
-     * @param [type] $pseudoUser
-     * @param [type] $mailUser
-     * @param [type] $mdpUser
-     * @param [type] $statutUser
+     * @param [type] $type
      * @return void
      */
-    public function add($titreMusique, $descMusique, $mediaMusique, $imageMusique,$typeMusique)
+    public function add($type)
     {
         // Init
         static $ps = null;
-        $sql = 'INSERT INTO musiques (TitreMusique,Description,Musique,ImagePochette,IdType) values (:titreMusique,:descMusique,:mediaMusique,:imageMusique,:typeMusique)';
+        $sql = 'INSERT INTO typemusiques (Type) values (:type)';
         $flag = false;
         // Process
         if ($ps === null) {
             $ps = Database::getPDO()->prepare($sql);
         }
         try {
-            $ps->bindParam(':titreMusique', $titreMusique);
-            $ps->bindParam(':descMusique', $descMusique);
-            $ps->bindParam(':mediaMusique', $mediaMusique);
-            $ps->bindParam(':imageMusique', $imageMusique);
-            $ps->bindParam(':typeMusique', $typeMusique);
+            $ps->bindParam(':type', $type);
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = false;
@@ -35,8 +28,36 @@ class Types
         // Output
         return $flag;
     }
-    
 
+    /**
+     * Fonction qui permet grace à une requete sql de supprimer un enregistrement dans ma table à l'aide de l'id
+     *
+     * @param [type] $typeId
+     * @return void
+     */
+    public function deleteTypeById($typeId)
+    {
+        // Init
+        static $ps = null;
+        $sql = 'DELETE FROM typemusiques where IdType = :IdType';
+        $flag = false;
+        // Process
+        if ($ps === null) {
+            $ps = Database::getPDO()->prepare($sql);
+        }
+        try {
+            $ps->bindParam(':IdType', $idMusique);
+            $ps->execute();
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+    
+    /**
+     * Fonction qui permet à l'aide d'une requete sql de récupérer tout les types
+     *
+     * @return void
+     */
     public function getAllOptions()
     {
         // Init
@@ -49,5 +70,31 @@ class Types
         } catch (PDOException $e) {
             return null;
         }
+    }
+    /**
+     * Fonction qui fait une requete sql pour modifier un type dans ma table
+     *
+     * @return void
+     */
+    public function UpdateTypeById($typeId,$type)
+    {
+        // Init
+        static $ps = null;
+        $sql = 'UPDATE typemusiques set type = :type WHERE IdType = :idType';
+        $flag = false;
+        // Process
+        if ($ps === null) {
+            $ps = Database::getPDO()->prepare($sql);
+        }
+        try {
+            $ps->bindParam(':idType', $typeId);
+            $ps->bindParam(':type',$type);
+            $flag = $ps->execute();
+        } catch (PDOException $e) {
+            $flag = false;
+            $codeErreur = $e->getCode();
+        }
+        // Output
+        return $flag;
     }
 }

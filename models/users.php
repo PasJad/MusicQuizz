@@ -38,6 +38,48 @@ class Users
         return $flag;
     }
 
+    /**
+     * Fonction qui vas modifier un utilisateur avec un id donné
+     *
+     * @param [type] $idUser
+     * @param [type] $nom
+     * @param [type] $pseudo
+     * @param [type] $mail
+     * @param [type] $pwd
+     * @param [type] $img
+     * @return void
+     */
+    public function UpdateUser($idUser,$nom,$pseudo,$mail,$pwd,$img)
+    {
+        // Init
+        static $ps = null;
+        $sql = 'UPDATE users set
+        Nom = :nom,
+        Pseudo = :pseudo,
+        Email = :mail,
+        Mdp = :pwd,
+        Avatar = :img WHERE IdUser = :idUser';
+        $flag = false;
+        // Process
+        if ($ps === null) {
+            $ps = Database::getPDO()->prepare($sql);
+        }
+        try {
+            $ps->bindParam(':idUser', $idUser);
+            $ps->bindParam(':nom', $nom);
+            $ps->bindParam(':pseudo', $pseudo);
+            $ps->bindParam(':mail', $mail);
+            $ps->bindParam(':pwd', $pwd);
+            $ps->bindParam(':img',$img);
+            $flag = $ps->execute();
+        } catch (PDOException $e) {
+            $flag = false;
+            $codeErreur = $e->getCode();
+        }
+        // Output
+        return $flag;
+    }
+
     public function getAllUsers()
     {
         // Init

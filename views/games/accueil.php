@@ -16,20 +16,17 @@
             <label for="slider" id="sec">Temps </label> 
             <label for="slider" id="sec2">13 secondes</label>
             </div>
-            <input type="range" class="slider" name="slider" id="slider1" min="5" max="20" oninput="UpdateSlider(this.value)" />
+            <?=$rangeSlider?>
           </div>
           <br>
           <select name="nbQuestion" class="selections">
-            <option value="10"> 10 Questions </option>
-            <option value="20"> 20 Questions </option>
-            <option value="30"> 30 Questions </option>
+            <?=$selected?>
           </select>
         </div>
         <br>
         <div class="choixType">
-          <input type="radio" id="chant" name="type" value="chant" selected=""> <label for="chant">Chant</label> 
-          <br>
-          <input type="radio" id="image" name="type" value="image"> <label for="image">Image</label>
+        <?=$choixDesTypes?>
+          
         </div>
 
 

@@ -15,7 +15,11 @@ $ctrlr = new ControllerRegister();
 if ($action == "inscription") {
     if (isset($submit)) {
         if (!empty($pseudo) && !empty($mail) && !empty($mdp)) {
-            $ctrlr->create($pseudo, $mail, $mdp, 0);
+            if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+                echo "<script>alert('Veuillez entrer un mail valide !')</script>";
+            } else {
+                $ctrlr->create($pseudo, $mail, $mdp, 0);
+            }
         }
     }
 }
@@ -49,7 +53,6 @@ class ControllerRegister
     {   // ? Peut-être que le Hashage n'est pas bien placé
         $hpswd = password_hash($pMdp, PASSWORD_DEFAULT);
         if ($this->mUser->add($pPseudo, $pMail, $hpswd, $pStatut)) {
-            header("Location: ./index.php?uc=login");
         }
     }
     function edit()

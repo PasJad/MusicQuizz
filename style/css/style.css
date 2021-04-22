@@ -42,7 +42,7 @@ body {
   height: 530px;
 }
 
-#mediaForm{
+#mediaForm {
   position: relative;
   top: 20%;
   margin: auto;
@@ -51,36 +51,50 @@ body {
   width: 24%;
   height: 760px;
 }
+#mediaTypeForm {
+  position: relative;
+  top: 20%;
+  margin: auto;
+  background-color: white;
+  border-radius: 10px;
+  width: 24%;
+  height: 220px;
+}
 
-input[type='range']{
-  width : 100%;
+input[type="range"] {
+  width: 100%;
   -webkit-appearance: none;
   outline: none;
-  background: linear-gradient(90deg, #6700CD 50%, rgba(128, 0, 255, 0) 105.75%, #2e0053 105.75%);
+  background: linear-gradient(
+    90deg,
+    #6700cd 50%,
+    rgba(128, 0, 255, 0) 105.75%,
+    #2e0053 105.75%
+  );
   height: 15px;
   border-radius: 30px;
   margin-top: 3%;
 }
-input[type='range']::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 25px;
   height: 25px;
-  border-radius: 50%; 
+  border-radius: 50%;
   border: 3px white solid;
-  background: #6700CD;
+  background: #6700cd;
   cursor: pointer;
 }
 
-input[type='range']::-moz-range-thumb {
+input[type="range"]::-moz-range-thumb {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: #6700CD;
+  background: #6700cd;
   border: 1px white solid;
   cursor: pointer;
 }
-.slider-img{
+.slider-img {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -89,7 +103,7 @@ input[type='range']::-moz-range-thumb {
   width: 100%;
   margin-left: 5%;
 }
-.profilbutton{
+.profilbutton {
   position: absolute;
   background: black;
   color: white;
@@ -106,15 +120,14 @@ input[type='range']::-moz-range-thumb {
   max-width: 30%;
   bottom: 1%;
   right: 1%;
-  
 }
-.sec23{
+.sec23 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.profilbutton .deconnexion{
+.profilbutton .deconnexion {
   visibility: hidden;
   height: 80%;
   vertical-align: middle;
@@ -128,9 +141,8 @@ input[type='range']::-moz-range-thumb {
   border-radius: 10px;
   color: black;
   text-decoration: none;
-  
 }
-.headband{
+.headband {
   position: absolute;
   padding-left: 1%;
   top: 0.5%;
@@ -142,8 +154,8 @@ input[type='range']::-moz-range-thumb {
   border-radius: 10px;
   width: 45%;
 }
-#volume{
-  width : 30%;
+#volume {
+  width: 30%;
   -webkit-appearance: none;
   outline: none;
   background: white;
@@ -151,7 +163,7 @@ input[type='range']::-moz-range-thumb {
   border-radius: 30px;
   margin-top: 3%;
 }
-#jouer{
+#jouer {
   background: #000000;
   border-radius: 10px;
   appearance: none;
@@ -162,17 +174,16 @@ input[type='range']::-moz-range-thumb {
   width: 60%;
   height: 12%;
 }
-.profilbutton:hover .deconnexion{
+.profilbutton:hover .deconnexion {
   visibility: visible;
-  
 }
-.profilbutton:hover{
+.profilbutton:hover {
   cursor: pointer;
 }
 
-.paramContainer{
+.paramContainer {
   top: 10%;
-  background-color: #25004A;
+  background-color: #25004a;
   border-radius: 10px;
   color: white;
   height: 100%;
@@ -187,8 +198,7 @@ input[type='range']::-moz-range-thumb {
   margin-left: 5%;
 }
 
-
-select{
+select {
   width: 50%;
   background-color: white;
   font-family: Poppins;
@@ -209,13 +219,96 @@ select{
   height: 600px;
   margin-top: 5%;
 }
-.champsContainer{
+.parties-titres{
+ height: 65%;
+}
+.mesParties {
+  border: 1pt black solid;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  margin: 1%;
+  border-radius: 10px;
+  height: 88%;
+}
+.partie {
+  margin: 1%;
+  padding: 3px;
+  background: #f4f4f4;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  font-weight: 500;
+  font-size: large;
+  width: 17%;
+}
+.profilform {
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  position: relative;
+  margin: auto;
+  background-color: white;
+  border-radius: 10px;
+  width: 65%;
+  height: 600px;
+  margin-top: 5%;
+}
+
+#btnBack {
+  position: absolute;
+  height: 60px;
+  width: 150px;
+  color: white;
+  font-weight: 600;
+  font-size: xx-large;
+  text-decoration: none;
+  background: grey;
+  border-radius: 10px;
+  appearance: none;
+  border: none;
+  bottom: -12%;
+  right: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#btnBack:hover {
+  cursor: pointer;
+}
+
+#btnModifier {
+  position: absolute;
+  height: 60px;
+  width: 150px;
+  color: white;
+  font-weight: 600;
+  font-size: xx-large;
+  text-decoration: none;
+  background: #20e200;
+  border-radius: 10px;
+  appearance: none;
+  border: none;
+  bottom: -12%;
+  right: 0;
+}
+
+#btnModifier:hover {
+  cursor: pointer;
+}
+
+.champsContainer {
   display: flex;
   flex-direction: row;
   height: 10%;
   border-radius: 10px;
   align-items: center;
-  background-color: #F4F4F4;
+  background-color: #f4f4f4;
   padding: 6px;
   margin: 1%;
   font-family: Poppins;
@@ -225,14 +318,14 @@ select{
   height: 90%;
   width: 26%;
 }
-.champsContainer div:first-child{
+.champsContainer div:first-child {
   width: 3%;
 }
 
-.champsContainer audio{
+.champsContainer audio {
   width: 65%;
 }
-#btnDelete{
+#btnDelete {
   background-color: rgb(200, 0, 0);
   color: white;
   font-weight: 600;
@@ -240,14 +333,14 @@ select{
   text-decoration: none;
 }
 
-#btnEdit{
+#btnEdit {
   background-color: rgb(0, 0, 0);
   color: white;
   font-weight: 600;
   font-size: xx-large;
   text-decoration: none;
 }
-#btnNew{
+#btnNew {
   background-color: rgb(0, 132, 255);
   color: white;
   font-weight: 600;
@@ -257,11 +350,11 @@ select{
   border-radius: 10px;
   right: 17.5%;
 }
-#champDescription{
+#champDescription {
   overflow: hidden;
 }
 
-input[type="file"]{
+input[type="file"] {
   appearance: none;
   background: white;
   outline: none;
@@ -288,8 +381,9 @@ input[type="file"]{
   justify-content: space-evenly;
   align-items: center;
   width: 90%;
-  height:80%;
+  height: 80%;
 }
+
 
 #loginform {
   position: relative;
@@ -300,7 +394,7 @@ input[type="file"]{
   width: 24%;
   height: 445px;
 }
-.champ{
+.champ {
   background-color: white;
   border-radius: 10px;
   text-align: center;
@@ -333,7 +427,7 @@ input[type="file"]{
   margin-top: 10px;
 }
 
-#descArea{
+#descArea {
   height: 42%;
 }
 
@@ -390,7 +484,7 @@ input[type="file"]{
 /* Bout de code CSS récupérer sur StackOverflow pour mettre des radio boutons carré 
  * https://stackoverflow.com/questions/24516958/styling-radio-buttons-into-a-square#24517881
  */
-input[type='radio'] {
+input[type="radio"] {
   appearance: none;
   background: white;
   outline: none;
@@ -399,6 +493,6 @@ input[type='radio'] {
   height: 25px;
 }
 
-input[type='radio']:checked {
+input[type="radio"]:checked {
   background: black;
 }

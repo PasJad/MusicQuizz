@@ -9,7 +9,7 @@
 
 <body onload="setTimeout(NextMusic,<?=$_SESSION['game']['timerMS'] * 10?>)">
     <div class="gameform">
-        <div class="headband">Quel est cette musique ? : <?=$_SESSION['game']['nbStep']?>/10</div>
+        <div class="headband">Quel est cette musique ? : <?=$_SESSION['game']['nbStep']?> / <?=$_SESSION['game']['nbQuestion']?></div>
         <form id='formGame' action="index.php?uc=game&action=next" method="post" class="formParam">
             <div class="paramContainer">
                 <div class="slider-img">
