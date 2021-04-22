@@ -36,9 +36,7 @@ class ControllerLogin
 
     public function show()
     {
-        //TODO Montrer tout les utilisateurs
-
-
+        
     }
 
     /**

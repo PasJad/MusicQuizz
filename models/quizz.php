@@ -27,5 +27,6 @@ class Quizz
         // Output
         return $flag;
     }
+
 }
 ?>

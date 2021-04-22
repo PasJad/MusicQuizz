@@ -38,6 +38,35 @@ class Users
         return $flag;
     }
 
+    public function addCompleteUser($nom,$pseudoUser, $mailUser, $mdpUser, $statutUser,$imgPath)
+    {
+        // Init
+        static $ps = null;
+        $sql = 'INSERT INTO users (Pseudo,Nom,Email,Mdp,Avatar,Statut) values (:pseudoUser,:nomUser,:mailUser,:mdpUser,:imgPath,:statutUser)';
+        $flag = false;
+        // Process
+        if ($ps === null) {
+            $ps = Database::getPDO()->prepare($sql);
+        }
+        try {
+            $ps->bindParam(':nomUser', $nom);
+            $ps->bindParam(':pseudoUser', $pseudoUser);
+            $ps->bindParam(':mailUser', $mailUser);
+            $ps->bindParam(':mdpUser', $mdpUser);
+            $ps->bindParam(':statutUser', $statutUser);
+            $ps->bindParam(':imgPath',$imgPath);
+            $flag = $ps->execute();
+        } catch (PDOException $e) {
+            $flag = true;
+            $codeErreur = $e->getCode();
+            if ($codeErreur == 23000) {
+                echo '<script>alert("Ce compte est déjà existant")</script>';
+            }
+        }
+        // Output
+        return $flag;
+    }
+
     /**
      * Fonction qui vas modifier un utilisateur avec un id donné
      *
@@ -127,6 +156,66 @@ class Users
             $ps->bindParam(':mailUser', $mailUser);
             $ps->execute();
             return $ps->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function getUserById($Id)
+    {
+        // Init
+        static $ps = null;
+        $sql = 'select * from users where IdUser = :IdUser';
+        $flag = false;
+        // Process
+        if ($ps === null) {
+            $ps = Database::getPDO()->prepare($sql);
+        }
+        try {
+            $ps->bindParam(':IdUser', $Id);
+            $ps->execute();
+            return $ps->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+
+
+    public function getAllQuizFromUserId($id)
+    {
+         // Init
+         static $ps = null;
+         $sql = "SELECT Quizz.IdQuizz,Quizz.Score FROM users 
+         INNER JOIN user_parametres on users.IdUser = user_parametres.IdUser 
+         INNER JOIN parametres on parametres.IdParametre = user_parametres.IdParametre 
+         INNER JOIN quizz on quizz.IdQuizz = parametres.IdQuizz where users.IdUser = :IdUser";
+         $flag = false;
+         if ($ps === null) {
+            $ps = Database::getPDO()->prepare($sql);    
+         }
+         // Process
+         try {
+            $ps->bindParam(':IdUser', $id);
+             $ps->execute();
+             return $ps->fetchAll(PDO::FETCH_ASSOC);
+         } catch (PDOException $e) {
+             return null;
+         }
+    }
+
+    public function deleteUserById($id)
+    {
+        // Init
+        static $ps = null;
+        $sql = 'DELETE FROM users where IdUser = :IdUser';
+        $flag = false;
+        // Process
+        if ($ps === null) {
+            $ps = Database::getPDO()->prepare($sql);
+        }
+        try {
+            $ps->bindParam(':IdUser', $id);
+            $ps->execute();
         } catch (PDOException $e) {
             return $e->getMessage();
         }

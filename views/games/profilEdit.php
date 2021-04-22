@@ -10,11 +10,11 @@
   <div class="mainform" id="profilForm">
     <form action="index.php?uc=profil&action=modifier&id=<?=$id?>" enctype="multipart/form-data" method="post">
 
-      <input type="text" class="textboxform" placeholder="Nom" id="" name="nomMusique" value="<?= $_SESSION["User"][0]['Nom'] ?>" required />
-      <input type="text" class="textboxform" placeholder="Pseudo" id="" name="nomMusique" value="<?= $_SESSION["User"][0]['Pseudo'] ?>" required />
-      <input type="mail" class="textboxform" placeholder="E-Mail" id="" name="nomMusique" value="<?= $_SESSION["User"][0]['Email'] ?>" required />
-      <input type="password" class="textboxform" placeholder="******" id="" name="nomMusique" required />
-      <input type="file" class="textboxform" id="" name="uploadImage[]" accept="image/*" required />
+      <input type="text" class="textboxform" placeholder="Nom" id="" name="nomUser" value="<?= $userModify[0]['Nom'] ?>" required />
+      <input type="text" class="textboxform" placeholder="Pseudo" id="" name="pseudoUser" value="<?= $userModify[0]['Pseudo'] ?>" required />
+      <input type="mail" class="textboxform" placeholder="E-Mail" id="" name="mailUser" value="<?= $userModify[0]['Email'] ?>" required />
+      <input type="password" class="textboxform" placeholder="******" id="" name="mdpUser" required />
+      <input type="file" class="textboxform" id="" name="uploadImage[]" accept="image/*"/>
       <input type="submit" id="inscrire" value="Modifier" name="submitEdit">
     </form>
   </div>

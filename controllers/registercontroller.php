@@ -19,6 +19,8 @@ if ($action == "inscription") {
                 echo "<script>alert('Veuillez entrer un mail valide !')</script>";
             } else {
                 $ctrlr->create($pseudo, $mail, $mdp, 0);
+                header("Location: ./index.php?uc=Login");
+                exit();
             }
         }
     }

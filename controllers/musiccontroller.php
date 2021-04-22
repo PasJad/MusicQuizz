@@ -213,7 +213,7 @@ class ControllerMusic
             $Errorflag = true;
         }
         if ($Errorflag == false) {
-            if ($this->mMusic->add($titre, $desc, $pathMusique, $pathImage, $type)) {
+            if ($this->mMusic->add($titre, $desc, $pathMusique, $pathImage, $type) && $Errorflag == false) {
                 if (move_uploaded_file($mediasMusiques['tmp_name'][0], $pathMusique) &&  move_uploaded_file($mediasImages['tmp_name'][0], $pathImage)) {
                 } else {
                     $Errorflag = true;
@@ -246,7 +246,7 @@ class ControllerMusic
         } else {
             $Errorflag = true;
         }
-        if ($this->mMusic->UpdateMusique($titre, $desc, $pathMusique, $pathImage, $type, $idEditMusique)) {
+        if ($this->mMusic->UpdateMusique($titre, $desc, $pathMusique, $pathImage, $type, $idEditMusique) && $Errorflag == false) {
             if (move_uploaded_file($mediasMusiques['tmp_name'][0], $pathMusique) &&  move_uploaded_file($mediasImages['tmp_name'][0], $pathImage)) {
                     unlink($monTitre[0]['Musique']);
                     unlink($monTitre[0]['ImagePochette']);

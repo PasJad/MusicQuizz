@@ -16,9 +16,8 @@ if ($action == "score") {
         $score = $_SESSION['User']['Score'];
         $ctrlP->addQuiz($score);
         $lastidQuiz = Database::getPDO()->lastInsertId();
-        var_dump($_SESSION['game']['titresJoue']);
         $ctrlP->saveMusicOfQuizz($_SESSION['game']['titresJoue'],$lastidQuiz);
-        $ctrlP->create($_SESSION['game']['nbQuestion'], $_SESSION['game']['timerMS'] / 100, $_SESSION['game']['typePartie'], Database::getPDO()->lastInsertId());
+        $ctrlP->create($_SESSION['game']['nbQuestion'], $_SESSION['game']['timerMS'] / 100, $_SESSION['game']['typePartie'], $lastidQuiz);
         $lastidParam = Database::getPDO()->lastInsertId();
         $ctrlP->addUserParam($lastidParam, $_SESSION['User'][0]['IdUser']);
         unset($_SESSION['User']['Score']);
