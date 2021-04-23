@@ -1,3 +1,11 @@
+<!--
+Nom : Tayan
+Prénom : Jad
+Ecole : CFPT-Informatique
+Date : 23.04.2021
+Projet : TPI 2021
+Fichier : accueil.php
+ -->
 <html>
 <head>
   <title>Accueil</title>
@@ -14,7 +22,7 @@
           <div>
             <div class="sec23">
             <label for="slider" id="sec">Temps </label> 
-            <label for="slider" id="sec2">13 secondes</label>
+            <label for="slider" id="sec2"><?=$vTemps?> secondes</label>
             </div>
             <?=$rangeSlider?>
           </div>

@@ -1,3 +1,11 @@
+<!--
+Nom : Tayan
+Prénom : Jad
+Ecole : CFPT-Informatique
+Date : 23.04.2021
+Projet : TPI 2021
+Fichier : game.php
+ -->
 <html>
 
 <head>
@@ -13,7 +21,11 @@
         <form id='formGame' action="index.php?uc=game&action=next" method="post" class="formParam">
             <div class="paramContainer">
                 <div class="slider-img">
+                    <div>
+                    🔊
                     <input id="volume" type="range" min="1" max="100" value="30" id="myNumber" oninput="UpdateVolume(this.value)">
+                    </div>
+                    
                     <?=$aDeviner?>
                 </div>
                 <div class="choixType">

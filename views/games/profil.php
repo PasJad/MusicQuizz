@@ -1,7 +1,15 @@
+<!--
+Nom : Tayan
+Prénom : Jad
+Ecole : CFPT-Informatique
+Date : 23.04.2021
+Projet : TPI 2021
+Fichier : profil.php
+ -->
 <html>
 
 <head>
-    <title>Accueil</title>
+    <title>Profil</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="../../style/css/style.css">
     <script src="../../style/js/app.js"></script>
@@ -9,17 +17,13 @@
 
 <body>
     <?=$AdminBanner?>
-    <nav class="navBar">
-    <a href="index.php?uc=media&action=show" class="navBtn">Chansons</a>
-    <a href="index.php?uc=media&action=showType" class="navBtn">Type Chansons</a>
-    <a href="index.php?uc=profil&action=showUsers" class="navBtn">Utilisateurs</a>
-    </nav>
+    
     <div class="profilform">
         <div class="profilInfo">
             <img class="profilPic" src="<?= $_SESSION['User'][0]['Avatar'] ?>">
             <div id='profilTicket'>
                 <span id="profilName"><?= $_SESSION['User'][0]['Pseudo'] ?></span>
-                <span id="profilScore">Score : <?= 0 //$scoreTotal
+                <span id="profilScore">Score : <?= $scoreTotal //$scoreTotal
                                                 ?> </span>
             </div>
         </div>

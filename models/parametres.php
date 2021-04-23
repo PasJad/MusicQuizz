@@ -1,44 +1,61 @@
 <?php
+/**
+  * Nom : Tayan
+  * Prénom : Jad
+  * Ecole : CFPT-Informatique
+  * Date : 23.04.2021
+  * Projet : TPI 2021
+  * Fichier : Parametres.php
+  */
 require_once("./config/db.php");
 class Parametres
 {
 
+    /**
+     * Fonction modèle qui formule la requête pour récupérer les parametres pour un id user donnée 
+     *
+     * @param [int] $UserId
+     * @return array
+     */
     public function getParamByIdUser($UserId)
     {
-        // Init
+        //Initialisation
         static $ps = null;
         $sql = "SELECT parametres.IdParametre,NbQuestions,Temps,TypePartie FROM parametres INNER JOIN user_parametres on parametres.IdParametre = user_parametres.IdParametre INNER JOIN users on user_parametres.IdUser = users.IdUser where  users.IdUser = :idUser";
+        //Traitement
         if ($ps === null) {
             $ps = Database::getPDO()->prepare($sql);
         }
-        // Process
+        // Try catch pour attraper les erreur
         try {
             $ps->bindParam(':idUser', $UserId);
             $ps->execute();
+            //Sortie
             return $ps->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             return null;
         }
     }
     /**
-     * Fonction d'ajout dans la table parametres
+     * Fonction du modèle qui formule la requête pour ajouter un set de paramètre dans ma base
      *
-     * @param [type] $NbQuestion
-     * @param [type] $Temps
-     * @param [type] $TypePartie
-     * @param [type] $IdQuiz
-     * @return void
+     * @param [int] $NbQuestion
+     * @param [int] $Temps
+     * @param [string] $TypePartie
+     * @param [int] $IdQuiz
+     * @return bool
      */
     public function add($NbQuestion,$Temps,$TypePartie,$IdQuiz)
     {
-        // Init
+        //Initialisation
         static $ps = null;
         $sql = 'INSERT INTO parametres (NbQuestions,Temps,TypePartie,IdQuizz) values (:NbQuestion,:Temps,:TypePartie,:IdQuiz)';
         $flag = false;
-        // Process
+        //Traitement
         if ($ps === null) {
             $ps = Database::getPDO()->prepare($sql);
         }
+        // Try catch pour attraper les erreur
         try {
             $ps->bindParam(':NbQuestion', $NbQuestion);
             $ps->bindParam(':Temps', $Temps);
@@ -48,23 +65,25 @@ class Parametres
         } catch (PDOException $e) {
             $flag = false;
         }
-        // Output
+        //Sortie
         return $flag;
     }
 
     /**
-     * Fonction qui nous retournes tout les parametres
+     * Fonction modèle qui formule la requête pour avoir tout les paramètres
      *
-     * @return void
+     * @return array
      */
     public function getAllParameters()
     {
-        // Init
+        //Initialisation
         $sql = "SELECT * FROM parametres";
         $ps = Database::getPDO()->query($sql);
-        // Process
+        //Traitement
+        // Try catch pour attraper les erreur
         try {
             $ps->execute();
+            //Sortie
             return $ps->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             return null;

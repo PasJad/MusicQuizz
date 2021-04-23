@@ -1,5 +1,13 @@
 <?php session_start(); ?>
 <?php
+/**
+  * Nom : Tayan
+  * Prénom : Jad
+  * Ecole : CFPT-Informatique
+  * Date : 23.04.2021
+  * Projet : TPI 2021
+  * Fichier : index.php
+  */
 require_once("./ENV/env.php");
 $uc = filter_input(INPUT_GET, 'uc');
 $action = filter_input(INPUT_GET, 'action');

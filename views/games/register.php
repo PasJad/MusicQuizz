@@ -1,3 +1,11 @@
+<!--
+Nom : Tayan
+Prénom : Jad
+Ecole : CFPT-Informatique
+Date : 23.04.2021
+Projet : TPI 2021
+Fichier : register.php
+ -->
 <html>
 <head>
   <title>Inscription</title>

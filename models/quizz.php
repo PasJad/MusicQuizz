@@ -1,20 +1,29 @@
 <?php
+/**
+  * Nom : Tayan
+  * Prénom : Jad
+  * Ecole : CFPT-Informatique
+  * Date : 23.04.2021
+  * Projet : TPI 2021
+  * Fichier : Quizz.php
+  */
 require_once("./config/db.php");
 class Quizz
 {
     /**
-     * Ajoute une partie à la table quizz
+     * Fonction modèle qui formule la requête pour ajouter un quiz a ma table
      *
      * @param [type] $score
      * @return void
      */
     public function add($score)
     {
-        // Init
+        //Initialisation
         static $ps = null;
         $sql = 'INSERT INTO Quizz (Score) values (:score)';
         $flag = false;
-        // Process
+        //Traitement
+        // Try catch pour attraper les erreurs
         if ($ps === null) {
             $ps = Database::getPDO()->prepare($sql);
         }
@@ -24,7 +33,7 @@ class Quizz
         } catch (PDOException $e) {
             $flag = false;
         }
-        // Output
+        //Sortie
         return $flag;
     }
 

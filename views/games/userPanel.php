@@ -1,3 +1,11 @@
+<!--
+Nom : Tayan
+Prénom : Jad
+Ecole : CFPT-Informatique
+Date : 23.04.2021
+Projet : TPI 2021
+Fichier : userPanel.php
+ -->
 <html>
 
 <head>
@@ -21,7 +29,7 @@
                     echo "<div class='champ' placeholder='Mot de passe' id='" . $mesUsers[$i]['IdUser'] . "'" . ">"  . "</div>";
                     echo "<div class='champ' id='" . $mesUsers[$i]['IdUser'] . "'" . ">" . $mesUsers[$i]['Statut'] . "</div>";
                     echo "<a class='champ' id='BtnEdit' href='index.php?uc=profil&action=edit&id=" . $mesUsers[$i]['IdUser'] . "'>Edit</a>";
-                    echo "<a class='champ' id='BtnDelete' href='index.php?uc=profil&action=supprimer&id=" . $mesUsers[$i]['IdUser'] . "'>Delete</a>";
+                    echo "<a class='champ' id='BtnDelete' href='index.php?uc=profil&action=delete&id=" . $mesUsers[$i]['IdUser'] . "'>Delete</a>";
                     echo "</div>";
                 }
                 ?>

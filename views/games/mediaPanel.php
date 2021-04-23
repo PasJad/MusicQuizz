@@ -1,7 +1,15 @@
+<!--
+Nom : Tayan
+Prénom : Jad
+Ecole : CFPT-Informatique
+Date : 23.04.2021
+Projet : TPI 2021
+Fichier : mediaPanel.php
+ -->
 <html>
 
 <head>
-    <title>Accueil</title>
+    <title>Musiques</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="../../style/css/style.css">
     <script src="../../style/js/app.js"></script>

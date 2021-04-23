@@ -1,12 +1,21 @@
-<?php
+ <?php
+ /**
+  * Nom : Tayan
+  * Prénom : Jad
+  * Ecole : CFPT-Informatique
+  * Date : 23.04.2021
+  * Projet : TPI 2021
+  * Fichier : gamecontroller.php
+  */
 //Modèles nécessaire au controlleurs
 require_once("./models/Quizz.php");
 require_once("./models/Musiques.php");
+
 //Initialisation de mes variables pour ma vue
 $titres = array();
-
 $aDeviner = "";
 $typePartie = "";
+
 //Initialisation controlleur
 $ctrlg = new ControllerGame();
 
@@ -37,6 +46,7 @@ if ($action == "start" && !isset($_SESSION['game']['hasStarted'])) {
             $aDeviner = $ctrlg->getStep($titres, $typePartie);
             array_push($_SESSION['game']['titresJoue'],$_SESSION['game']['trueReponse']);
         } else {
+            //Si ce n'est pas bon on renvoie à l'accueil
             header("Location: index.php?uc=accueil");
             exit();
         }
@@ -61,7 +71,6 @@ if ($action == "next" && isset($_SESSION['game'])) {
         }
         //On récupère notre score et sauvegardons cette partie nous allons ensuite être redirigé vers la page de base
         $_SESSION['User']['Score'] = $_SESSION['game']['point'];
-
         header("Location: index.php?uc=accueil&action=score");
         exit();
     } else {
@@ -73,9 +82,9 @@ if ($action == "next" && isset($_SESSION['game'])) {
         array_push($_SESSION['game']['titresJoue'],$_SESSION['game']['trueReponse']);
         $aDeviner = $ctrlg->getStep($titres, $typePartie);
     }
-} else {
 }
 
+//Si la session de jeu est présente on affiche le jeu
 if (isset($_SESSION['game'])) {
     //Affichage de la vue
     require_once("./views/games/game.php");
@@ -89,15 +98,18 @@ class ControllerGame
     //Champs
     protected $mMusic;
 
+    /**
+     * Constructeur par défaut
+     */
     public function __construct()
     {
         $this->mMusic = new Musiques();
     }
 
     /**
-     * Fonction qui permet d'avoir quatre choix
+     * Fonction controlleur qui s'occupe de nous tirés 4 titres aléatoires
      *
-     * @return void
+     * @return array
      */
     public function getFourQuestion()
     {
@@ -147,6 +159,4 @@ class ControllerGame
         //Sortie
         return $aDeviner;
     }
-
-    
 }
