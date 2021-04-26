@@ -20,7 +20,7 @@
     //Initialisation controlleur
     $ctrlg = new ControllerGame();
 
-    if ($ctrlg->mMusic->getNumberOfMusique()['COUNT(*)'] < 4) {
+    if ($ctrlg->getNbMusic() < 4) {
         header("Location: index.php?uc=accueil");
         exit();
     }
@@ -164,5 +164,9 @@
             }
             //Sortie
             return $aDeviner;
+        }
+        public function getNbMusic()
+        {
+            return $this->mMusic->getNumberOfMusique()['COUNT(*)'];
         }
     }
