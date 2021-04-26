@@ -24,6 +24,7 @@ if ($action == "connexion") {
     if (isset($submit)) {
         //Vérification et filtrage de nos données
         $mail = filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_EMAIL);
+        $mail = strtolower($mail);
         $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
         if (!empty($mail) && !empty($mdp)) {
             $ctrll->Connexion($mail, $mdp);

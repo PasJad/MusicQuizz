@@ -2,7 +2,7 @@
   * Nom : Tayan
   * Prénom : Jad
   * Ecole : CFPT-Informatique
-  * Date : 23.04.2021
+  * Date : 26.04.2021
   * Projet : TPI 2021
   * Fichier : style.css
   */
@@ -363,6 +363,28 @@ select {
 }
 
 #btnBack:hover {
+  cursor: pointer;
+}
+
+#btnHome{
+  position: absolute;
+  height: 60px;
+  width: 150px;
+  color: white;
+  font-weight: 600;
+  font-size: xx-large;
+  text-decoration: none;
+  background: grey;
+  border-radius: 10px;
+  appearance: none;
+  border: none;
+  bottom: 16%;
+  right: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#btnHome:hover{
   cursor: pointer;
 }
 

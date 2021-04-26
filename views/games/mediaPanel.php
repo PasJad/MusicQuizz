@@ -35,7 +35,7 @@ Fichier : mediaPanel.php
                 ?>
 
         </div>
-        
+        <a href="index.php?uc=accueil" id="btnHome">Home</a>
         <input type="submit" name="create" value="Nouveau!" id="btnNew">
     </form>
 

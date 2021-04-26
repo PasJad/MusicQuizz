@@ -28,6 +28,7 @@ if ($action == "inscription") {
         //Vérification et filtrage des données reçus 
         $pseudo = filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_STRING);
         $mail = filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_EMAIL);
+        $mail = strtolower($mail);
         $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
         if (!empty($pseudo) && !empty($mail) && !empty($mdp)) {
             //On vérifie que l'email est correct
