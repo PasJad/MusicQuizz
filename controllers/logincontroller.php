@@ -11,7 +11,7 @@
 //Modèles nécessaire au controlleurs
 require_once("./models/Users.php");
 //Affiche ma vue
-require_once("./views/games/Login.php");
+require_once("./views/games/login.php");
 
 
 //Initialisation de mon controlleur
