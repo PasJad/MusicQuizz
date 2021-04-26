@@ -28,11 +28,11 @@ class Types
         }
         // Try catch pour attraper les erreur
         try {
-            $ps->bindParam(':type', $type);
+            $ps->bindParam(':type', $type, PDO::PARAM_STR);
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = false;
-            $codeErreur = $e->getCode();
+            return $e->getCode();
         }
         //Sortie
         return $flag;
@@ -56,11 +56,11 @@ class Types
         }
         // Try catch pour attraper les erreur
         try {
-            $ps->bindParam(':IdType', $idMusique);
+            $ps->bindParam(':IdType', $idMusique, PDO::PARAM_INT);
             $ps->execute();
         } catch (PDOException $e) {
             //Sortie
-            return $e->getMessage();
+            return $e->getCode();
         }
     }
     
@@ -80,7 +80,7 @@ class Types
             //Sortie
             return $ps->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return null;
+            return $e->getCode();
         }
     }
 
@@ -101,8 +101,8 @@ class Types
         }
         // Try catch pour attraper les erreur
         try {
-            $ps->bindParam(':idType', $typeId);
-            $ps->bindParam(':type',$type);
+            $ps->bindParam(':idType', $typeId, PDO::PARAM_INT);
+            $ps->bindParam(':type',$type, PDO::PARAM_STR);
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = false;

@@ -30,10 +30,11 @@ class Musiques_Quizz
         }
         //Try catch pour vérifier que la requête c'est bien executé
         try {
-            $ps->bindParam(':IdMusique', $IdMusique);
-            $ps->bindParam(':IdQuizz', $IdQuizz);
+            $ps->bindParam(':IdMusique', $IdMusique, PDO::PARAM_INT);
+            $ps->bindParam(':IdQuizz', $IdQuizz, PDO::PARAM_INT);
             $flag = $ps->execute();
         } catch (PDOException $e) {
+            return $e->getCode();
         }
         //Sortie
         return $flag;

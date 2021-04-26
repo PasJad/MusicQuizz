@@ -23,7 +23,7 @@ Fichier : profil.php
             <img class="profilPic" src="<?= $_SESSION['User'][0]['Avatar'] ?>">
             <div id='profilTicket'>
                 <span id="profilName"><?= $_SESSION['User'][0]['Pseudo'] ?></span>
-                <span id="profilScore">Score : <?= $scoreTotal //$scoreTotal
+                <span id="profilScore">Score : <?= $scoreTotal 
                                                 ?> </span>
             </div>
         </div>

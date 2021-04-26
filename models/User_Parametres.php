@@ -30,8 +30,8 @@ class User_Parametres
         }
         // Try catch pour attraper les erreur
         try {
-            $ps->bindParam(':IdParam', $IdParam);
-            $ps->bindParam(':IdUser', $IdUser);
+            $ps->bindParam(':IdParam', $IdParam, PDO::PARAM_INT);
+            $ps->bindParam(':IdUser', $IdUser, PDO::PARAM_INT);
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = false;

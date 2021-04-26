@@ -31,10 +31,10 @@ class Users
         }
         // Try catch pour attraper les erreur
         try {
-            $ps->bindParam(':pseudoUser', $pseudoUser);
-            $ps->bindParam(':mailUser', $mailUser);
-            $ps->bindParam(':mdpUser', $mdpUser);
-            $ps->bindParam(':statutUser', $statutUser);
+            $ps->bindParam(':pseudoUser', $pseudoUser, PDO::PARAM_STR);
+            $ps->bindParam(':mailUser', $mailUser, PDO::PARAM_STR);
+            $ps->bindParam(':mdpUser', $mdpUser, PDO::PARAM_STR);
+            $ps->bindParam(':statutUser', $statutUser, PDO::PARAM_INT);
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = true;
@@ -70,12 +70,12 @@ class Users
         }
         // Try catch pour attraper les erreur
         try {
-            $ps->bindParam(':nomUser', $nom);
-            $ps->bindParam(':pseudoUser', $pseudoUser);
-            $ps->bindParam(':mailUser', $mailUser);
-            $ps->bindParam(':mdpUser', $mdpUser);
-            $ps->bindParam(':statutUser', $statutUser);
-            $ps->bindParam(':imgPath',$imgPath);
+            $ps->bindParam(':nomUser', $nom, PDO::PARAM_STR);
+            $ps->bindParam(':pseudoUser', $pseudoUser, PDO::PARAM_STR);
+            $ps->bindParam(':mailUser', $mailUser, PDO::PARAM_STR);
+            $ps->bindParam(':mdpUser', $mdpUser, PDO::PARAM_STR);
+            $ps->bindParam(':statutUser', $statutUser, PDO::PARAM_INT);
+            $ps->bindParam(':imgPath',$imgPath, PDO::PARAM_STR);
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = true;
@@ -124,7 +124,7 @@ class Users
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = false;
-            $codeErreur = $e->getCode();
+            return $e->getCode();
         }
         //Sortie
         return $flag;
@@ -146,7 +146,7 @@ class Users
             //Sortie
             return $ps->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return null;
+            return $e->getCode();
         }
     }
 

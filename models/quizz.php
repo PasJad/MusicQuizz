@@ -28,7 +28,7 @@ class Quizz
             $ps = Database::getPDO()->prepare($sql);
         }
         try {
-            $ps->bindParam(':score', $score);
+            $ps->bindParam(':score', $score, PDO::PARAM_INT);
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = false;

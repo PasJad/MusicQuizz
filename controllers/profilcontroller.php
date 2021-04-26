@@ -1,12 +1,13 @@
 <?php
+
 /**
-  * Nom : Tayan
-  * Prénom : Jad
-  * Ecole : CFPT-Informatique
-  * Date : 23.04.2021
-  * Projet : TPI 2021
-  * Fichier : profilcontroller.php
-  */
+ * Nom : Tayan
+ * Prénom : Jad
+ * Ecole : CFPT-Informatique
+ * Date : 23.04.2021
+ * Projet : TPI 2021
+ * Fichier : profilcontroller.php
+ */
 //Modèles nécessaire au controlleurs
 require_once("./models/Users.php");
 //Initialisation
@@ -205,7 +206,6 @@ class ControllerProfil
             if ($this->mUser->addCompleteUser($nom, $pseudo, $mail, $pwd, $statut, $pathImage) && $Errorflag == false) {
                 //On upload notre image 
                 if (move_uploaded_file($img['tmp_name'][0], $pathImage)) {
-
                 } else {
                     $Errorflag = true;
                 }
@@ -280,8 +280,7 @@ class ControllerProfil
                 //On garde l'avatar de base
                 $img = $monUser[0]['Avatar'];
                 //On update l'utilisateur
-                if ($this->mUser->UpdateUser($monUser[0]['IdUser'], $nom, $pseudo, $mail, $pwd, $img)) {
-                }
+                $this->mUser->UpdateUser($monUser[0]['IdUser'], $nom, $pseudo, $mail, $pwd, $img);
             } else {
                 //Alors on a une image
                 //on vérifie le type de l'image 

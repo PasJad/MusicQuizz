@@ -14,10 +14,10 @@ class Parametres
     /**
      * Fonction modèle qui formule la requête pour récupérer les parametres pour un id user donnée 
      *
-     * @param [int] $UserId
+     * @param [int] $userId
      * @return array
      */
-    public function getParamByIdUser($UserId)
+    public function getParamByIdUser($userId)
     {
         //Initialisation
         static $ps = null;
@@ -28,7 +28,7 @@ class Parametres
         }
         // Try catch pour attraper les erreur
         try {
-            $ps->bindParam(':idUser', $UserId);
+            $ps->bindParam(':idUser', $userId, PDO::PARAM_INT);
             $ps->execute();
             //Sortie
             return $ps->fetchAll(PDO::FETCH_ASSOC);
@@ -45,7 +45,7 @@ class Parametres
      * @param [int] $IdQuiz
      * @return bool
      */
-    public function add($NbQuestion,$Temps,$TypePartie,$IdQuiz)
+    public function add($nbQuestion,$temps,$typePartie,$idQuiz)
     {
         //Initialisation
         static $ps = null;
@@ -57,13 +57,14 @@ class Parametres
         }
         // Try catch pour attraper les erreur
         try {
-            $ps->bindParam(':NbQuestion', $NbQuestion);
-            $ps->bindParam(':Temps', $Temps);
-            $ps->bindParam(':TypePartie', $TypePartie);
-            $ps->bindParam(':IdQuiz', $IdQuiz);
+            $ps->bindParam(':NbQuestion', $nbQuestion, PDO::PARAM_INT);
+            $ps->bindParam(':Temps', $temps, PDO::PARAM_INT);
+            $ps->bindParam(':TypePartie', $typePartie, PDO::PARAM_STR);
+            $ps->bindParam(':IdQuiz', $idQuiz, PDO::PARAM_INT);
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = false;
+            return $e->getCode();
         }
         //Sortie
         return $flag;
@@ -86,7 +87,7 @@ class Parametres
             //Sortie
             return $ps->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return null;
+            return $e->getCode();
         }
     }
 }

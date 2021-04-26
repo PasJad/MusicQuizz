@@ -15,6 +15,8 @@ require_once("./models/Musiques.php");
 $titres = array();
 $aDeviner = "";
 $typePartie = "";
+define("cent",100);
+
 
 //Initialisation controlleur
 $ctrlg = new ControllerGame();
@@ -40,7 +42,7 @@ if ($action == "start" && !isset($_SESSION['game']['hasStarted'])) {
             $_SESSION['game']['nbStep'] = 1;
             $_SESSION['game']['trueReponse'] = "";
             $_SESSION['game']['point'] = 0;
-            $_SESSION['game']['timerMS'] = $temps * 100;
+            $_SESSION['game']['timerMS'] = $temps * cent;
             //On récupère nos questions
             $titres = $ctrlg->getFourQuestion();
             $aDeviner = $ctrlg->getStep($titres, $typePartie);

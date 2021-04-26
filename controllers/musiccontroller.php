@@ -140,6 +140,7 @@ if ($action == "modifier") {
         $type = filter_input(INPUT_POST, 'optionsTypes', FILTER_SANITIZE_STRING);
         $mediasMusiques = $_FILES['uploadMusique'];
         $mediasImages = $_FILES['uploadImage'];
+        $monTitre = $ctrlm->getTitreById($id);
         //Vérification si c'est pas vide
         if (!empty($titre) && !empty($desc) && !empty($mediasImages) && !empty($mediasMusiques) && !empty($type) && !empty($id)) {
             //On modifie et on redirige vers le panel
@@ -220,8 +221,8 @@ class ControllerMusic
      */
     public function createType($type)
     {
-        if ($this->mType->add($type)) {
-        }
+        $this->mType->add($type);
+        
     }
     /**
      * Fonction controlleur qui s'occupe de créer une musique

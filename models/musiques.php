@@ -30,15 +30,15 @@ class Musiques
             $ps = Database::getPDO()->prepare($sql);
         }
         try {
-            $ps->bindParam(':titreMusique', $titreMusique);
-            $ps->bindParam(':descMusique', $descMusique);
-            $ps->bindParam(':mediaMusique', $mediaMusique);
-            $ps->bindParam(':imageMusique', $imageMusique);
-            $ps->bindParam(':typeMusique', $typeMusique);
+            $ps->bindParam(':titreMusique', $titreMusique, PDO::PARAM_STR);
+            $ps->bindParam(':descMusique', $descMusique, PDO::PARAM_STR);
+            $ps->bindParam(':mediaMusique', $mediaMusique, PDO::PARAM_STR);
+            $ps->bindParam(':imageMusique', $imageMusique, PDO::PARAM_STR);
+            $ps->bindParam(':typeMusique', $typeMusique, PDO::PARAM_STR);
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = false;
-            $codeErreur = $e->getCode();
+            return $e->getCode();
         }
         //Sortie
         return $flag;
@@ -60,7 +60,7 @@ class Musiques
             $ps->execute();
             return $ps->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return null;
+            return $e->getCode();
         }
     }
 
@@ -81,7 +81,7 @@ class Musiques
             //Sortie
             return $ps->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return null;
+            return $e->getCode();
         }
     }
 
@@ -122,7 +122,7 @@ class Musiques
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = false;
-            $codeErreur = $e->getCode();
+            return $e->getCode();
         }
         //Sortie
         return $flag;
@@ -150,7 +150,7 @@ class Musiques
             //Sortie
             return $ps->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return $e->getMessage();
+            return $e->getCode();
         }
     }
 
@@ -176,7 +176,7 @@ class Musiques
             $ps->execute();
         } catch (PDOException $e) {
             //Sortie
-            return $e->getMessage();
+            return $e->getCode();
         }
     }
 }
