@@ -11,8 +11,8 @@ Fichier : userPanel.php
 <head>
     <title>Panel Utilisateurs</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="../../style/css/style.css">
-    <script src="../../style/js/app.js"></script>
+    <link rel="stylesheet" type="text/css" href="./style/css/style.css">
+    <script src="./style/js/app.js"></script>
 </head>
 
 <body>
