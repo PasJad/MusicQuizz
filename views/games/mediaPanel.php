@@ -30,7 +30,6 @@ Fichier : mediaPanel.php
                     echo "</audio>";
                     echo "<img id='" . $mesTitres[$i]['IdMusique'] . "'" . "src='" . $mesTitres[$i]['ImagePochette'] . "' width='60%' height='60%'>";
                     echo "<a class='champ' id='BtnEdit' href='index.php?uc=media&action=edit&id=" . $mesTitres[$i]['IdMusique'] . "'>Edit</a>";
-                    echo "<a class='champ' id='BtnDelete' href='index.php?uc=media&action=delete&id=" . $mesTitres[$i]['IdMusique'] . "'>Delete</a>";
                     echo "</div>";
                 }
                 ?>

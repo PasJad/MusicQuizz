@@ -37,7 +37,7 @@ class Users
             $ps->bindParam(':statutUser', $statutUser, PDO::PARAM_INT);
             $flag = $ps->execute();
         } catch (PDOException $e) {
-            $flag = true;
+            $flag = false;
             $codeErreur = $e->getCode();
             if ($codeErreur == 23000) {
                 echo '<script>alert("Ce compte est déjà existant")</script>';
@@ -78,7 +78,7 @@ class Users
             $ps->bindParam(':imgPath',$imgPath, PDO::PARAM_STR);
             $flag = $ps->execute();
         } catch (PDOException $e) {
-            $flag = true;
+            $flag = false;
             $codeErreur = $e->getCode();
             if ($codeErreur == 23000) {
                 echo '<script>alert("Ce compte est déjà existant")</script>';
@@ -139,15 +139,17 @@ class Users
     {
         //Initialisation
         $sql = "SELECT * FROM users";
+        $flag = false;
         $ps = Database::getPDO()->query($sql);
         //Traitement
         try {
             $ps->execute();
             //Sortie
-            return $ps->fetchAll(PDO::FETCH_ASSOC);
+            $flag = $ps->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return $e->getCode();
+            $flag = false;
         }
+        return $flag;
     }
 
     /**
@@ -171,10 +173,11 @@ class Users
             $ps->bindParam(':mailUser', $mailUser);
             $ps->execute();
             //Sortie
-            return $ps->fetch(PDO::FETCH_ASSOC);
+            $flag = $ps->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return $e->getMessage();
+            $flag = false;
         }
+        return $flag;
     }
 
     /**
@@ -198,10 +201,11 @@ class Users
             $ps->bindParam(':mailUser', $mailUser);
             $ps->execute();
             //Sortie
-            return $ps->fetchAll(PDO::FETCH_ASSOC);
+            $flag = $ps->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return $e->getMessage();
+            $flag = false;
         }
+        return $flag;
     }
 
     /**
@@ -225,10 +229,11 @@ class Users
             $ps->bindParam(':IdUser', $Id);
             $ps->execute();
             //Sortie
-            return $ps->fetchAll(PDO::FETCH_ASSOC);
+            $flag = $ps->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return $e->getMessage();
+            $flag = false;
         }
+        return $flag;
     }
 
     /**
@@ -255,10 +260,11 @@ class Users
             $ps->bindParam(':IdUser', $id);
              $ps->execute();
              //Sortie
-             return $ps->fetchAll(PDO::FETCH_ASSOC);
+             $flag = $ps->fetchAll(PDO::FETCH_ASSOC);
          } catch (PDOException $e) {
-             return null;
+             $flag = false;
          }
+         return $flag;
     }
     /**
      * Fonction modèle qui formule la requête pour supprimer un utilisateur de ma table pour un id donnée
@@ -279,11 +285,12 @@ class Users
         // Try catch pour attraper les erreur
         try {
             $ps->bindParam(':IdUser', $id);
-            $ps->execute();
+            $flag = $ps->execute();
         } catch (PDOException $e) {
             //Sortie (En cas d'erreur)
-            return $e->getMessage();
+            $flag = false;
         }
+        return $flag;
     }
 
 

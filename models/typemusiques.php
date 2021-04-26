@@ -32,7 +32,6 @@ class Types
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = false;
-            return $e->getCode();
         }
         //Sortie
         return $flag;
@@ -57,11 +56,12 @@ class Types
         // Try catch pour attraper les erreur
         try {
             $ps->bindParam(':IdType', $idMusique, PDO::PARAM_INT);
-            $ps->execute();
+            $flag = $ps->execute();
         } catch (PDOException $e) {
             //Sortie
-            return $e->getCode();
+            $flag = false;
         }
+        return $flag;
     }
     
     /**
@@ -72,16 +72,18 @@ class Types
     public function getAllOptions()
     {
         //Initialisation
+        $flag = false;
         $sql = "SELECT IdType,Type FROM typemusiques";
         $ps = Database::getPDO()->query($sql);
         //Traitement
         try {
             $ps->execute();
             //Sortie
-            return $ps->fetchAll(PDO::FETCH_ASSOC);
+            $flag = $ps->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return $e->getCode();
+            $flag = false;
         }
+        return $flag;
     }
 
     /**

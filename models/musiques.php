@@ -38,7 +38,6 @@ class Musiques
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = false;
-            return $e->getCode();
         }
         //Sortie
         return $flag;
@@ -52,16 +51,18 @@ class Musiques
      */
     public function getAllMusiques()
     {
-        // Init
+        //Initialisation
+        $flag = false;
         $sql = "SELECT IdMusique,TitreMusique,Description,Musique,ImagePochette,Type FROM musiques INNER JOIN typeMusiques on musiques.IdType = typeMusiques.IdType";
         $ps = Database::getPDO()->query($sql);
-        // Process
+        //Traitement
         try {
             $ps->execute();
-            return $ps->fetchAll(PDO::FETCH_ASSOC);
+            $flag = $ps->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return $e->getCode();
+            $flag = false;
         }
+        return $flag;
     }
 
     /**
@@ -72,6 +73,7 @@ class Musiques
     public function getNumberOfMusique()
     {
         //Initialisation
+        $flag = false;
         $sql = "SELECT COUNT(*) FROM musiques";
         //Traitement
         $ps = Database::getPDO()->query($sql);
@@ -79,10 +81,11 @@ class Musiques
         try {
             $ps->execute();
             //Sortie
-            return $ps->fetch(PDO::FETCH_ASSOC);
+            $flag = $ps->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return $e->getCode();
+            $flag = false;
         }
+        return $flag;
     }
 
     /**
@@ -113,16 +116,15 @@ class Musiques
         }
         //Try catch pour vérifier si on a une erreur
         try {
-            $ps->bindParam(':titreMusique', $titre);
-            $ps->bindParam(':descMusique', $desc);
-            $ps->bindParam(':mediaMusique', $mediasMusiques);
-            $ps->bindParam(':imageMusique', $mediasImages);
-            $ps->bindParam(':typeMusique', $type);
-            $ps->bindParam(':idEditMusique',$idEditMusique);
+            $ps->bindParam(':titreMusique', $titre, PDO::PARAM_STR);
+            $ps->bindParam(':descMusique', $desc, PDO::PARAM_STR);
+            $ps->bindParam(':mediaMusique', $mediasMusiques, PDO::PARAM_STR);
+            $ps->bindParam(':imageMusique', $mediasImages, PDO::PARAM_STR);
+            $ps->bindParam(':typeMusique', $type, PDO::PARAM_STR);
+            $ps->bindParam(':idEditMusique',$idEditMusique, PDO::PARAM_INT);
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = false;
-            return $e->getCode();
         }
         //Sortie
         return $flag;
@@ -148,10 +150,11 @@ class Musiques
             $ps->bindParam(':IdMusique', $idMusique);
             $ps->execute();
             //Sortie
-            return $ps->fetchAll(PDO::FETCH_ASSOC);
+            $flag =  $ps->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return $e->getCode();
+            $flag = false;
         }
+        return $flag;
     }
 
     /**

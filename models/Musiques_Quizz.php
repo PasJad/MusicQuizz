@@ -34,7 +34,7 @@ class Musiques_Quizz
             $ps->bindParam(':IdQuizz', $IdQuizz, PDO::PARAM_INT);
             $flag = $ps->execute();
         } catch (PDOException $e) {
-            return $e->getCode();
+            $flag = false;
         }
         //Sortie
         return $flag;

@@ -25,7 +25,6 @@ Fichier : mediaTypePanel.php
                     echo "<div class='champ' id='" . $mesTypes[$i]['IdType'] . "'" . ">" . $mesTypes[$i]['IdType'] . "</div>";
                     echo "<div class='champ' id='" . $mesTypes[$i]['Type'] . "'" . ">" . $mesTypes[$i]['Type'] . "</div>";
                     echo "<a class='champ' id='BtnEdit' href='index.php?uc=media&action=editType&id=" . $mesTypes[$i]['IdType'] . "'>Edit</a>";
-                    echo "<a class='champ' id='BtnDelete' href='index.php?uc=media&action=deleteType&id=" . $mesTypes[$i]['IdType'] . "'>Delete</a>";
                     echo "</div>";
                 }
                 ?>

@@ -1,12 +1,13 @@
 <?php
+
 /**
-  * Nom : Tayan
-  * Prénom : Jad
-  * Ecole : CFPT-Informatique
-  * Date : 23.04.2021
-  * Projet : TPI 2021
-  * Fichier : musiccontroller.php
-  */
+ * Nom : Tayan
+ * Prénom : Jad
+ * Ecole : CFPT-Informatique
+ * Date : 23.04.2021
+ * Projet : TPI 2021
+ * Fichier : musiccontroller.php
+ */
 //On vérifie si on est administrateur sinon on nous renvoie à l'accueil
 if ($_SESSION['User'][0]['Statut'] != 1) {
     header("Location: index.php?uc=accueil");
@@ -222,7 +223,6 @@ class ControllerMusic
     public function createType($type)
     {
         $this->mType->add($type);
-        
     }
     /**
      * Fonction controlleur qui s'occupe de créer une musique
@@ -312,8 +312,12 @@ class ControllerMusic
             //Si il n'y a pas eu d'erreurs et que notre requête à fonctionner on tente l'upload
             if (move_uploaded_file($mediasMusiques['tmp_name'][0], $pathMusique) &&  move_uploaded_file($mediasImages['tmp_name'][0], $pathImage)) {
                 //Si notre upload est bon alors on supprimer les ancienne images
-                unlink($monTitre[0]['Musique']);
-                unlink($monTitre[0]['ImagePochette']);
+                if ($monTitre[0]['Musique'] != $pathMusique) {
+                    unlink($monTitre[0]['Musique']);
+                }
+                if ($monTitre[0]['ImagePochette'] != $pathImage) {
+                    unlink($monTitre[0]['ImagePochette']);
+                }
             } else {
                 $Errorflag = true;
             }

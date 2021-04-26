@@ -21,6 +21,7 @@ class Parametres
     {
         //Initialisation
         static $ps = null;
+        $flag = false;
         $sql = "SELECT parametres.IdParametre,NbQuestions,Temps,TypePartie FROM parametres INNER JOIN user_parametres on parametres.IdParametre = user_parametres.IdParametre INNER JOIN users on user_parametres.IdUser = users.IdUser where  users.IdUser = :idUser";
         //Traitement
         if ($ps === null) {
@@ -31,10 +32,11 @@ class Parametres
             $ps->bindParam(':idUser', $userId, PDO::PARAM_INT);
             $ps->execute();
             //Sortie
-            return $ps->fetchAll(PDO::FETCH_ASSOC);
+            $flag = $ps->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return null;
+            $flag = false;
         }
+        return $flag;
     }
     /**
      * Fonction du modèle qui formule la requête pour ajouter un set de paramètre dans ma base
@@ -64,7 +66,6 @@ class Parametres
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = false;
-            return $e->getCode();
         }
         //Sortie
         return $flag;
@@ -78,6 +79,7 @@ class Parametres
     public function getAllParameters()
     {
         //Initialisation
+        $flag = false;
         $sql = "SELECT * FROM parametres";
         $ps = Database::getPDO()->query($sql);
         //Traitement
@@ -85,9 +87,10 @@ class Parametres
         try {
             $ps->execute();
             //Sortie
-            return $ps->fetchAll(PDO::FETCH_ASSOC);
+            $flag = $ps->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return $e->getCode();
+            $flag = false;
         }
+        return $flag;
     }
 }
