@@ -72,15 +72,15 @@ if ($action == "modifier") {
     $submit = filter_input(INPUT_POST, 'submitEdit', FILTER_SANITIZE_STRING);
     if (isset($submit)) {
         //Filtrage des données
-        $Nom = filter_input(INPUT_POST, 'nomUser', FILTER_SANITIZE_STRING);
-        $Pseudo = filter_input(INPUT_POST, 'pseudoUser', FILTER_SANITIZE_STRING);
-        $Email = filter_input(INPUT_POST, 'mailUser', FILTER_SANITIZE_STRING);
-        $Mdp = filter_input(INPUT_POST, 'mdpUser', FILTER_SANITIZE_STRING);
-        $Avatar = $_FILES['uploadImage'];
+        $nom = filter_input(INPUT_POST, 'nomUser', FILTER_SANITIZE_STRING);
+        $pseudo = filter_input(INPUT_POST, 'pseudoUser', FILTER_SANITIZE_STRING);
+        $email = filter_input(INPUT_POST, 'mailUser', FILTER_SANITIZE_STRING);
+        $mdp = filter_input(INPUT_POST, 'mdpUser', FILTER_SANITIZE_STRING);
+        $avatar = $_FILES['uploadImage'];
         //Vérification si c'est pas vide
-        if (!empty($Nom) && !empty($Pseudo) && !empty($Email) && !empty($Mdp) && !empty($id)) {
+        if (!empty($nom) && !empty($pseudo) && !empty($email) && !empty($mdp) && !empty($id)) {
             //On vérifie si l'email est valide
-            if (!filter_var($Email, FILTER_VALIDATE_EMAIL)) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 //Si l'email n'est pas valide on envoie une alerte
                 echo "<script>alert('Veuillez entrer un mail valide !')</script>";
                 header("Location: index.php&action=login");
@@ -90,13 +90,13 @@ if ($action == "modifier") {
                 $monUser = $_SESSION['User'];
                 //Si c'est notre compte qu'on est entrain de modifier on est renvoyé à notre page de profil
                 if ($_SESSION['User'][0]['IdUser'] == $id) {
-                    $_SESSION['User'] = $ctrlp->UpdateProfil($Nom, $Pseudo, $Email, $Mdp, $Avatar, $monUser);
+                    $_SESSION['User'] = $ctrlp->UpdateProfil($nom, $pseudo, $email, $Mdp, $avatar, $monUser);
                     header("Location: index.php?uc=profil");
                     exit();
                 } else if ($_SESSION['User'][0]['Statut'] == 1) {
                     //Dans le cas ou ce n'est pas le cas c'est uniquement l'admin qui à ses droits et on est redirigé vers le panel
                     $monUser = $ctrlp->getUserById($id);
-                    $ctrlp->UpdateProfil($Nom, $Pseudo, $Email, $Mdp, $Avatar, $monUser);
+                    $ctrlp->UpdateProfil($nom, $pseudo, $email, $mdp, $avatar, $monUser);
                     header("Location: index.php?uc=profil&action=showUsers");
                     exit();
                 }
@@ -174,7 +174,7 @@ class ControllerProfil
      * @param [string] $nom
      * @param [string] $pseudo
      * @param [string] $mail
-     * @param [string] $pwd
+     * @param string $pwd
      * @param [int] $statut
      * @param [img] $img
      * @return void
@@ -183,7 +183,7 @@ class ControllerProfil
     {
         //Initialisation
         $pwd = password_hash($pwd, PASSWORD_DEFAULT);
-        $Errorflag = false;
+        $errorFlag = false;
         $filenameImage = $img['name'][0];
         $filenameImage = uniqid() . "." . pathinfo($filenameImage, PATHINFO_EXTENSION);
         $pathImage = "./user/img/" . $filenameImage;
@@ -191,28 +191,25 @@ class ControllerProfil
         //Traitement
         $pdo->beginTransaction();
         //On vérifie les erreurs à toutes les étapes
-        if ($Errorflag == false) {
+        if ($errorFlag == false) {
             //Vérification du type envoyer
-            if ($this->checkFilesType($img)) {
-            } else {
-                $Errorflag = true;
+            if ($this->checkFilesType($img) == false) {
+                $errorFlag = true;
             }
             //Vérification de la taille du fichier
             if ($this->checkFilesSize($img)) {
-            } else {
-                $Errorflag = true;
+                $errorFlag = true;
             }
             //Si tout est bon on doit créer un utilisateurs au complet (Donc Nom en plus) et on vérifie si il n'y a pas de problème
-            if ($this->mUser->addCompleteUser($nom, $pseudo, $mail, $pwd, $statut, $pathImage) && $Errorflag == false) {
+            if ($this->mUser->addCompleteUser($nom, $pseudo, $mail, $pwd, $statut, $pathImage) && $errorFlag == false) {
                 //On upload notre image 
                 if (move_uploaded_file($img['tmp_name'][0], $pathImage)) {
-                } else {
-                    $Errorflag = true;
+                    $errorFlag = true;
                 }
             }
         }
         //Dans le cas ou le flag d'erreur à été déclenché on rollback pour annuler notre requete sql
-        if ($Errorflag == true) {
+        if ($errorFlag == true) {
             $pdo->rollBack();
         } else {
             //Sinon on commit notre requête
@@ -257,7 +254,7 @@ class ControllerProfil
      * @param [string] $nom
      * @param [string] $pseudo
      * @param [string] $mail
-     * @param [string] $pwd
+     * @param string $pwd
      * @param [img] $img
      * @param [array] $monUser
      * @return void
@@ -265,7 +262,7 @@ class ControllerProfil
     function UpdateProfil($nom, $pseudo, $mail, $pwd, $img, $monUser)
     {
         //Initialisation
-        $Errorflag = false;
+        $errorFlag = false;
         $filenameImage = $img['name'][0];
         $filenameImage = uniqid() . "." . pathinfo($filenameImage, PATHINFO_EXTENSION);
         $pathImage = "./user/img/" . $filenameImage;
@@ -274,7 +271,7 @@ class ControllerProfil
         //Traitement
         $pdo->beginTransaction();
         //Vérification des erreurs à chaque étapes
-        if ($Errorflag == false) {
+        if ($errorFlag == false) {
             //Si on a pas d'image
             if ($img['name'][0] == "") {
                 //On garde l'avatar de base
@@ -284,17 +281,15 @@ class ControllerProfil
             } else {
                 //Alors on a une image
                 //on vérifie le type de l'image 
-                if ($this->checkFilesType($img)) {
-                } else {
-                    $Errorflag = true;
+                if ($this->checkFilesType($img) == false) {
+                    $errorFlag = true;
                 }
                 //On vérifie la taille de l'image
-                if ($this->checkFilesSize($img)) {
-                } else {
-                    $Errorflag = true;
+                if ($this->checkFilesSize($img) == false) {
+                    $errorFlag = true;
                 }
                 //On update et on vérifie si il n'y a toujours pas d'erreur
-                if ($this->mUser->UpdateUser($monUser[0]['IdUser'], $nom, $pseudo, $mail, $pwd, $pathImage) && $Errorflag == false) {
+                if ($this->mUser->UpdateUser($monUser[0]['IdUser'], $nom, $pseudo, $mail, $pwd, $pathImage) && $errorFlag == false) {
                     //On upload notre fichier
                     if (move_uploaded_file($img['tmp_name'][0], $pathImage)) {
                         //Si l'avatar n'est pas vide
@@ -306,13 +301,13 @@ class ControllerProfil
                             }
                         }
                     } else {
-                        $Errorflag = true;
+                        $errorFlag = true;
                     }
                 }
             }
         }
         //Si le flag d'erreur à été levé
-        if ($Errorflag == true) {
+        if ($errorFlag == true) {
             //On annule notre requête
             $pdo->rollBack();
         } else {

@@ -91,7 +91,7 @@ class Types
      *
      * @return void
      */
-    public function UpdateTypeById($typeId,$type)
+    public function updateTypeById($typeId,$type)
     {
         //Initialisation
         static $ps = null;

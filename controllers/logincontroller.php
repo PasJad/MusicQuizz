@@ -33,7 +33,7 @@ if ($action == "connexion") {
 }
 //Si l'action est deconnexion on se déconnecte dans tout les cas
 if ($action == "deconnexion") {
-    $ctrll->Deconnexion();
+    $ctrll->deconnexion();
 }
 
 //Si on est déjà connecté
@@ -65,18 +65,18 @@ class ControllerLogin
      * @param [string] $pStatut
      * @return void
      */
-    public function Connexion($pMail, $pMdp)
+    public function connexion($mail, $mdp)
     {
         //Récupère le mot de passe hashé dans la base de données
-        $hashedpwd = $this->mUser->getUserPswdByMail($pMail);
+        $hashedpwd = $this->mUser->getUserPswdByMail($mail);
         if (empty($hashedpwd)) {
             //Si c'est vide on affiche une alerte
             echo '<script>alert("Compte Inexistant")</script>';
         } else {
             //Vérifie que le mot de passe entré et celui associé au mail dans la base soit le même
-            if (password_verify($pMdp, $hashedpwd['Mdp'])) {
+            if (password_verify($mdp, $hashedpwd['Mdp'])) {
                 //Créer une session User
-                $_SESSION["User"] = $this->mUser->getUserByMail($pMail);
+                $_SESSION["User"] = $this->mUser->getUserByMail($mail);
             } else {
                 //Si le mot de passe n'est pas bon on envoie une alerte
                 echo '<script>alert("Information erroné")</script>';
@@ -89,7 +89,7 @@ class ControllerLogin
      *
      * @return void
      */
-    public function Deconnexion()
+    public function deconnexion()
     {
         //Invalide la session et la détruit
         session_unset();

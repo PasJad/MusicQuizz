@@ -3,7 +3,7 @@
      * Nom : Tayan
      * Prénom : Jad
      * Ecole : CFPT-Informatique
-     * Date : 23.04.2021
+     * Date : 27.04.2021
      * Projet : TPI 2021
      * Fichier : gamecontroller.php
      */
@@ -122,18 +122,18 @@
             //Initialisation
             $titres = array();
             $idDejaTire = array();
-            $RND = 0;
+            $rnd = 0;
             $nbMusique = $this->mMusic->getNumberOfMusique()['COUNT(*)'];
             //Traitement
             //Tant que on a pas 4 choix on continue d'en chercher
             while (count($titres) != 4) {
-                $RND = rand(1, $nbMusique);
+                $rnd = rand(1, $nbMusique);
                 //Comme on prend de manière aléatoire dans notre base on vérifie de ne pas tiré deux fois le même choix
-                if (!in_array($RND, $idDejaTire)) {
-                    $musiqueAQCM = $this->mMusic->getMusiqueById($RND);
+                if (!in_array($rnd, $idDejaTire)) {
+                    $musiqueAQCM = $this->mMusic->getMusiqueById($rnd);
                     //Ensuite on ajoute dans nos titres
                     array_push($titres, $musiqueAQCM);
-                    array_push($idDejaTire, $RND);
+                    array_push($idDejaTire, $rnd);
                 }
             }
             //Sortie
@@ -149,18 +149,18 @@
         public function getStep($titres, $typePartie)
         {
             //Initialisation
-            $RND = 0;
-            $RND = rand(0, 3);
+            $rnd = 0;
+            $rnd = rand(0, 3);
             $aDeviner = "";
-            $_SESSION['game']['trueReponse'] = $titres[$RND];
+            $_SESSION['game']['trueReponse'] = $titres[$rnd];
             //Traitement
             //Dans le cas ou mon type de partie est une chanson alors il faudra intégrer une balise audio
             if ($_SESSION['game']['typePartie'] == "chant") {
-                $aDeviner = "<audio autoplay id='player'>" . "<source src='" .  $titres[$RND][0]['Musique'] . "#t=" . rand(50, 90) . "'>"  . "</audio>";
+                $aDeviner = "<audio autoplay id='player'>" . "<source src='" .  $titres[$rnd][0]['Musique'] . "#t=" . rand(50, 90) . "'>"  . "</audio>";
             }
             //Dans le cas ou mon type de partie est une chanson alors il faudra intégrer une balise image
             if ($_SESSION['game']['typePartie'] == "image") {
-                $aDeviner = "<img src='" . $titres[$RND][0]['ImagePochette'] . "' width='200px' height='200px'/>";
+                $aDeviner = "<img src='" . $titres[$rnd][0]['ImagePochette'] . "' width='200px' height='200px'/>";
             }
             //Sortie
             return $aDeviner;

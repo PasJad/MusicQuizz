@@ -66,11 +66,11 @@ class ControllerRegister
      * @param [int] $pStatut
      * @return void
      */
-    public function create($pPseudo, $pMail, $pMdp, $pStatut)
+    public function create($pseudo, $mail, $mdp, $statut)
     {   
         //Traitement
-        $hpswd = password_hash($pMdp, PASSWORD_DEFAULT);
-        if ($this->mUser->add($pPseudo, $pMail, $hpswd, $pStatut)) {
+        $hpswd = password_hash($mdp, PASSWORD_DEFAULT);
+        if ($this->mUser->add($pseudo, $mail, $hpswd, $statut)) {
         }
     }
 }

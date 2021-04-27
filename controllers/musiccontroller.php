@@ -237,7 +237,7 @@ class ControllerMusic
     function create($titre, $desc, $mediasMusiques, $mediasImages, $type)
     {
         //Initialisation
-        $Errorflag = false;
+        $errorFlag = false;
         $filenameMusique = $mediasMusiques['name'][0];
         $filenameImage = $mediasImages['name'][0];
         $pathMusique = "./medias/music/" . $filenameMusique;
@@ -246,28 +246,26 @@ class ControllerMusic
         //Traitement
         $pdo->beginTransaction();
         //Vérification du type des fichiers envoyés
-        if ($this->checkFilesType($mediasMusiques, $mediasImages)) {
-        } else {
-            $Errorflag = true;
-        }
+        if ($this->checkFilesType($mediasMusiques, $mediasImages) == false) {
+            $errorFlag = true;
+        } 
         //Vérification de la taille des fichiers envoyés
-        if ($this->checkFilesSize($mediasMusiques, $mediasImages)) {
-        } else {
-            $Errorflag = true;
+        if ($this->checkFilesSize($mediasMusiques, $mediasImages) == false) {
+            $errorFlag = true;
         }
         //Vérification des erreurs à chaque étapes
-        if ($Errorflag == false) {
+        if ($errorFlag == false) {
             //Ajout et vérification des erreurs
-            if ($this->mMusic->add($titre, $desc, $pathMusique, $pathImage, $type) && $Errorflag == false) {
+            if ($this->mMusic->add($titre, $desc, $pathMusique, $pathImage, $type) && $errorFlag == false) {
                 //Si il n'y a pas d'erreurs on upload nos fichiers
                 if (move_uploaded_file($mediasMusiques['tmp_name'][0], $pathMusique) &&  move_uploaded_file($mediasImages['tmp_name'][0], $pathImage)) {
                 } else {
-                    $Errorflag = true;
+                    $errorFlag = true;
                 }
             }
         }
         //Si il y a une erreur on rollback notre requête
-        if ($Errorflag == true) {
+        if ($errorFlag == true) {
             $pdo->rollBack();
         } else {
             //Sinon on commit
@@ -289,7 +287,7 @@ class ControllerMusic
     function edit($titre, $desc, $mediasMusiques, $mediasImages, $type, $idEditMusique, $monTitre)
     {
         //Initialisation
-        $Errorflag = false;
+        $errorFlag = false;
         $filenameMusique = $mediasMusiques['name'][0];
         $filenameImage = $mediasImages['name'][0];
         $pathMusique = "./medias/music/" . $filenameMusique;
@@ -298,17 +296,15 @@ class ControllerMusic
         //Traitement
         $pdo->beginTransaction();
         //Vérification des types de nos fichiers
-        if ($this->checkFilesType($mediasMusiques, $mediasImages)) {
-        } else {
-            $Errorflag = true;
-        }
+        if ($this->checkFilesType($mediasMusiques, $mediasImages) == false) {
+            $errorFlag = true;
+        } 
         //Vérification de la taille de nos fichiers
-        if ($this->checkFilesSize($mediasMusiques, $mediasImages)) {
-        } else {
-            $Errorflag = true;
+        if ($this->checkFilesSize($mediasMusiques, $mediasImages) == false) {
+            $errorFlag = true;
         }
         //Si il n'y a pas d'erreurs alors on tente notre requête
-        if ($this->mMusic->UpdateMusique($titre, $desc, $pathMusique, $pathImage, $type, $idEditMusique) && $Errorflag == false) {
+        if ($this->mMusic->updateMusique($titre, $desc, $pathMusique, $pathImage, $type, $idEditMusique) && $errorFlag == false) {
             //Si il n'y a pas eu d'erreurs et que notre requête à fonctionner on tente l'upload
             if (move_uploaded_file($mediasMusiques['tmp_name'][0], $pathMusique) &&  move_uploaded_file($mediasImages['tmp_name'][0], $pathImage)) {
                 //Si notre upload est bon alors on supprimer les ancienne images
@@ -319,11 +315,11 @@ class ControllerMusic
                     unlink($monTitre[0]['ImagePochette']);
                 }
             } else {
-                $Errorflag = true;
+                $errorFlag = true;
             }
         }
         //Si le flag d'erreur à été levé alors on rollback notre requête
-        if ($Errorflag == true) {
+        if ($errorFlag == true) {
             $pdo->rollBack();
         } else {
             //Sinon on commit notre requête
@@ -339,7 +335,7 @@ class ControllerMusic
      */
     public function editType($nameType, $idTypeToEdit)
     {
-        $this->mType->UpdateTypeById($idTypeToEdit, $nameType);
+        $this->mType->updateTypeById($idTypeToEdit, $nameType);
     }
 
     /**
@@ -348,22 +344,22 @@ class ControllerMusic
      * @param [int] $IdMusiqueADelete
      * @return void
      */
-    function delete($IdMusiqueADelete)
+    function delete($idMusiqueADelete)
     {
-        $musique = $this->getTitreById($IdMusiqueADelete);
+        $musique = $this->getTitreById($idMusiqueADelete);
         unlink($musique[0]['Musique']);
         unlink($musique[0]['ImagePochette']);
-        $this->mMusic->deleteMusiqueById($IdMusiqueADelete);
+        $this->mMusic->deleteMusiqueById($idMusiqueADelete);
     }
     /**
      * Fonction controlleur qui s'occupe de supprimer un type pour un id donnée (Impossible)
      *
-     * @param [type] $IdTypeADelete
+     * @param [type] $idTypeADelete
      * @return void
      */
-    public function deleteType($IdTypeADelete)
+    public function deleteType($idTypeADelete)
     {
-        $this->mType->deleteTypeById($IdTypeADelete);
+        $this->mType->deleteTypeById($idTypeADelete);
     }
 
     /**

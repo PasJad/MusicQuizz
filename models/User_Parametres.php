@@ -14,11 +14,11 @@ class User_Parametres
     /**
      * Fonction modèle qui formule une requête sql qui ajoute dans ma table de liaison
      *
-     * @param [int] $IdParam
-     * @param [int] $IdUser
+     * @param [int] $idParam
+     * @param [int] $idUser
      * @return void
      */
-    public function add($IdParam, $IdUser)
+    public function add($idParam, $idUser)
     {
         //Initialisation
         static $ps = null;
@@ -30,8 +30,8 @@ class User_Parametres
         }
         // Try catch pour attraper les erreur
         try {
-            $ps->bindParam(':IdParam', $IdParam, PDO::PARAM_INT);
-            $ps->bindParam(':IdUser', $IdUser, PDO::PARAM_INT);
+            $ps->bindParam(':IdParam', $idParam, PDO::PARAM_INT);
+            $ps->bindParam(':IdUser', $idUser, PDO::PARAM_INT);
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = false;

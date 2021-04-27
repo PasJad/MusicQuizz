@@ -99,7 +99,7 @@ class Users
      * @param [string] $img
      * @return void
      */
-    public function UpdateUser($idUser,$nom,$pseudo,$mail,$pwd,$img)
+    public function updateUser($idUser,$nom,$pseudo,$mail,$pwd,$img)
     {
         //Initialisation
         static $ps = null;
@@ -115,12 +115,12 @@ class Users
             $ps = Database::getPDO()->prepare($sql);
         }
         try {
-            $ps->bindParam(':idUser', $idUser);
-            $ps->bindParam(':nom', $nom);
-            $ps->bindParam(':pseudo', $pseudo);
-            $ps->bindParam(':mail', $mail);
-            $ps->bindParam(':pwd', $pwd);
-            $ps->bindParam(':img',$img);
+            $ps->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+            $ps->bindParam(':nom', $nom, PDO::PARAM_STR);
+            $ps->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
+            $ps->bindParam(':mail', $mail, PDO::PARAM_STR);
+            $ps->bindParam(':pwd', $pwd, PDO::PARAM_STR);
+            $ps->bindParam(':img',$img, PDO::PARAM_STR);
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = false;
@@ -170,7 +170,7 @@ class Users
         }
         // Try catch pour attraper les erreur
         try {
-            $ps->bindParam(':mailUser', $mailUser);
+            $ps->bindParam(':mailUser', $mailUser,PDO::PARAM_STR);
             $ps->execute();
             //Sortie
             $flag = $ps->fetch(PDO::FETCH_ASSOC);
@@ -198,7 +198,7 @@ class Users
         }
         // Try catch pour attraper les erreur
         try {
-            $ps->bindParam(':mailUser', $mailUser);
+            $ps->bindParam(':mailUser', $mailUser,PDO::PARAM_STR);
             $ps->execute();
             //Sortie
             $flag = $ps->fetchAll(PDO::FETCH_ASSOC);
@@ -214,7 +214,7 @@ class Users
      * @param [int] $Id
      * @return void
      */
-    public function getUserById($Id)
+    public function getUserById($id)
     {
         //Initialisation
         static $ps = null;
@@ -226,7 +226,7 @@ class Users
         }
         // Try catch pour attraper les erreur
         try {
-            $ps->bindParam(':IdUser', $Id);
+            $ps->bindParam(':IdUser', $id,PDO::PARAM_STR);
             $ps->execute();
             //Sortie
             $flag = $ps->fetchAll(PDO::FETCH_ASSOC);
@@ -257,7 +257,7 @@ class Users
          }
          // Try catch pour attraper les erreur
          try {
-            $ps->bindParam(':IdUser', $id);
+            $ps->bindParam(':IdUser', $id,PDO::PARAM_INT);
              $ps->execute();
              //Sortie
              $flag = $ps->fetchAll(PDO::FETCH_ASSOC);
@@ -284,7 +284,7 @@ class Users
         }
         // Try catch pour attraper les erreur
         try {
-            $ps->bindParam(':IdUser', $id);
+            $ps->bindParam(':IdUser', $id,PDO::PARAM_STR);
             $flag = $ps->execute();
         } catch (PDOException $e) {
             //Sortie (En cas d'erreur)

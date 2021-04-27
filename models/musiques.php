@@ -99,7 +99,7 @@ class Musiques
      * @param [id] $idEditMusique
      * @return bool
      */
-    public function UpdateMusique($titre, $desc, $mediasMusiques, $mediasImages, $type,$idEditMusique)
+    public function updateMusique($titre, $desc, $mediasMusiques, $mediasImages, $type,$idEditMusique)
     {
         //Initialisation
         static $ps = null;
@@ -147,7 +147,7 @@ class Musiques
             $ps = Database::getPDO()->prepare($sql);
         }
         try {
-            $ps->bindParam(':IdMusique', $idMusique);
+            $ps->bindParam(':IdMusique', $idMusique, PDO::PARAM_INT);
             $ps->execute();
             //Sortie
             $flag =  $ps->fetchAll(PDO::FETCH_ASSOC);
@@ -175,7 +175,7 @@ class Musiques
         }
         //Try catch pour vérifier si nous n'avons pas eu d'erreur
         try {
-            $ps->bindParam(':IdMusique', $idMusique);
+            $ps->bindParam(':IdMusique', $idMusique, PDO::PARAM_INT);
             $ps->execute();
         } catch (PDOException $e) {
             //Sortie

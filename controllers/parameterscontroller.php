@@ -51,9 +51,9 @@ if (!isset($_SESSION["User"])) {
 } else {
     //Sinon on récupère les parametres de notre utilisateurs
     $_SESSION['UserParam'] = $ctrlP->getParamOfUser($_SESSION["User"][0]['IdUser']);
-    $tailletableau = count($_SESSION['UserParam']);
-    if (isset($_SESSION['UserParam'][$tailletableau - 1]['Temps'])) {
-        $vTemps = $_SESSION['UserParam'][$tailletableau - 1]['Temps'];
+    $tailleTableau = count($_SESSION['UserParam']);
+    if (isset($_SESSION['UserParam'][$tailleTableau - 1]['Temps'])) {
+        $vTemps = $_SESSION['UserParam'][$tailleTableau - 1]['Temps'];
     }
     else{
         $vTemps = 13;
@@ -62,15 +62,15 @@ if (!isset($_SESSION["User"])) {
     if (!empty($_SESSION['UserParam'])) {
         //On affiche dynamiquement l'affichage de nos paramètres selons les valeurs entrées
         for ($i = 10; $i <= 30; $i += 10) {
-            if ($i == $_SESSION['UserParam'][$tailletableau - 1]['NbQuestions']) {
+            if ($i == $_SESSION['UserParam'][$tailleTableau - 1]['NbQuestions']) {
                 $selected .= "<option selected value='" . $i . "'> " . $i . " Questions </option>";
             } else {
                 $selected .= "<option value='" . $i . "'> " . $i . " Questions </option>";
             }
         }
-        $rangeSlider = "<input type='range' class='slider' value='" . $_SESSION['UserParam'][$tailletableau - 1]['Temps'] . "' name='slider' id='slider1' min='5' max='20' oninput='UpdateSlider(this.value)'/>";
+        $rangeSlider = "<input type='range' class='slider' value='" . $_SESSION['UserParam'][$tailleTableau - 1]['Temps'] . "' name='slider' id='slider1' min='5' max='20' oninput='UpdateSlider(this.value)'/>";
 
-        if ($_SESSION['UserParam'][$tailletableau - 1]['TypePartie'] == "chant") {
+        if ($_SESSION['UserParam'][$tailleTableau - 1]['TypePartie'] == "chant") {
             $choixDesTypes = "<input type='radio' id='chant' name='type' value='chant' checked> <label for='chant'>Chant</label> 
         <br>
         <input type='radio' id='image' name='type' value='image'> <label for='image'>Image</label>";
@@ -128,33 +128,32 @@ class ControllerParameters
     /**
      * Fonction controlleur qui s'occupe de créer les paramètres
      *
-     * @param [int] $NbQuestion
-     * @param [int] $temps
-     * @param [string] $typePartie
-     * @param [int] $IdQuizz
+     * @param int $nbQuestion
+     * @param int $temps
+     * @param string $typePartie
+     * @param int $idQuizz
      * @return void
      */
-    public function create($NbQuestion, $temps, $typePartie, $IdQuizz)
+    public function create($nbQuestion, $temps, $typePartie, $idQuizz)
     {
-        if ($this->mParam->add($NbQuestion, $temps, $typePartie, $IdQuizz)) {
-        }
+        $this->mParam->add($nbQuestion, $temps, $typePartie, $idQuizz);
     }
 
     /**
      * Fonction controlleur qui s'occupe d'ajouter les parametres liés au users dans la base
      *
-     * @param [int] $IdParam
-     * @param [int] $IdUser
+     * @param int $idParam
+     * @param int $idUser
      * @return void
      */
-    public function addUserParam($IdParam, $IdUser)
+    public function addUserParam($idParam, $idUser)
     {
-        $this->mUserParam->add($IdParam, $IdUser);
+        $this->mUserParam->add($idParam, $idUser);
     }
     /**
      * Fonction controlleur qui s'occupe d'ajouter un quizz
      *
-     * @param [int] $score
+     * @param int $score
      * @return void
      */
     public function addQuiz($score)
@@ -164,7 +163,7 @@ class ControllerParameters
     /**
      * Fonction controlleur qui s'occupe de récupérer les paramètres d'un utilisateur avec un id donnée 
      *
-     * @param [int] $idUser
+     * @param int $idUser
      * @return array
      */
     public function getParamOfUser($idUser)
@@ -174,14 +173,19 @@ class ControllerParameters
     /**
      * Fonction controlleur qui s'occupe de sauvegarder les musiques liés au quiz dans la base
      *
-     * @param [int] $titresJoue
-     * @param [int] $IdQuiz
+     * @param array $titresJoue
+     * @param int $idQuiz
      * @return void
      */
-    public function saveMusicOfQuizz($titresJoue, $IdQuiz)
+    public function saveMusicOfQuizz($titresJoue, $idQuiz)
     {
+        $idDejaTire = array();
         foreach ($titresJoue as $key => $value) {
-            $this->mMusicQuizz->add($value[0]['IdMusique'], $IdQuiz);
+            if (!in_array($value[0]['IdMusique'], $idDejaTire)) {
+                $this->mMusicQuizz->add($value[0]['IdMusique'], $idQuiz);
+                //Ensuite on ajoute dans nos titres
+                array_push($idDejaTire, $value[0]['IdMusique']);
+            }
         }
     }
 }

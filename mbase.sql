@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `parametres` (
   PRIMARY KEY (`IdParametre`),
   UNIQUE KEY `IdQuizz` (`IdQuizz`),
   CONSTRAINT `FK_IdQuizz_Quizz` FOREIGN KEY (`IdQuizz`) REFERENCES `quizz` (`IdQuizz`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='mes paramètres de partie';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='mes paramètres de partie';
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `quizz` (
   `DateQuizz` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Score` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`IdQuizz`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table qui répertorie les quiz qui ce sont déroulés';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table qui répertorie les quiz qui ce sont déroulés';
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `typemusiques` (
   `Type` char(75) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`IdType`),
   UNIQUE KEY `Type` (`Type`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='table contenant les différents genre de musiques';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='table contenant les différents genre de musiques';
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `Statut` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`IdUser`),
   UNIQUE KEY `Email` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='table de mes utilisateurs';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='table de mes utilisateurs';
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `user_parametres` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
-INSERT INTO `users` (`IdUser`, `Nom`, `Pseudo`, `Email`, `Mdp`, `Avatar`, `Statut`) VALUES (18, 'Tn3', 'Jad', 'Admin@admin.com', '$2y$10$1ePeuWcUqV158WhT9YPdKeWLKiZ4OAyldcBCjl9/y/vdOj5X14Xdm', './user/img/60825e137ed96.jpg', 1);
+INSERT INTO `users` (`IdUser`, `Nom`, `Pseudo`, `Email`, `Mdp`, `Avatar`, `Statut`) VALUES (1, 'Tn3', 'Jad', 'Admin@admin.com', '$2y$10$1ePeuWcUqV158WhT9YPdKeWLKiZ4OAyldcBCjl9/y/vdOj5X14Xdm', './user/img/60825e137ed96.jpg', 1);
 
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
