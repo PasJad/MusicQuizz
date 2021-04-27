@@ -7,7 +7,7 @@
 !.vscode/tasks.json
 !.vscode/launch.json
 *.code-workspace
-
+.mp3
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history

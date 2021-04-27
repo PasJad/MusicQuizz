@@ -90,13 +90,13 @@ if ($action == "modifier") {
                 $monUser = $_SESSION['User'];
                 //Si c'est notre compte qu'on est entrain de modifier on est renvoyé à notre page de profil
                 if ($_SESSION['User'][0]['IdUser'] == $id) {
-                    $_SESSION['User'] = $ctrlp->UpdateProfil($nom, $pseudo, $email, $Mdp, $avatar, $monUser);
+                    $_SESSION['User'] = $ctrlp->updateProfil($nom, $pseudo, $email, $Mdp, $avatar, $monUser);
                     header("Location: index.php?uc=profil");
                     exit();
                 } else if ($_SESSION['User'][0]['Statut'] == 1) {
                     //Dans le cas ou ce n'est pas le cas c'est uniquement l'admin qui à ses droits et on est redirigé vers le panel
                     $monUser = $ctrlp->getUserById($id);
-                    $ctrlp->UpdateProfil($nom, $pseudo, $email, $mdp, $avatar, $monUser);
+                    $ctrlp->updateProfil($nom, $pseudo, $email, $mdp, $avatar, $monUser);
                     header("Location: index.php?uc=profil&action=showUsers");
                     exit();
                 }
@@ -259,7 +259,7 @@ class ControllerProfil
      * @param [array] $monUser
      * @return void
      */
-    function UpdateProfil($nom, $pseudo, $mail, $pwd, $img, $monUser)
+    function updateProfil($nom, $pseudo, $mail, $pwd, $img, $monUser)
     {
         //Initialisation
         $errorFlag = false;
@@ -277,7 +277,7 @@ class ControllerProfil
                 //On garde l'avatar de base
                 $img = $monUser[0]['Avatar'];
                 //On update l'utilisateur
-                $this->mUser->UpdateUser($monUser[0]['IdUser'], $nom, $pseudo, $mail, $pwd, $img);
+                $this->mUser->updateUser($monUser[0]['IdUser'], $nom, $pseudo, $mail, $pwd, $img);
             } else {
                 //Alors on a une image
                 //on vérifie le type de l'image 
@@ -289,7 +289,7 @@ class ControllerProfil
                     $errorFlag = true;
                 }
                 //On update et on vérifie si il n'y a toujours pas d'erreur
-                if ($this->mUser->UpdateUser($monUser[0]['IdUser'], $nom, $pseudo, $mail, $pwd, $pathImage) && $errorFlag == false) {
+                if ($this->mUser->updateUser($monUser[0]['IdUser'], $nom, $pseudo, $mail, $pwd, $pathImage) && $errorFlag == false) {
                     //On upload notre fichier
                     if (move_uploaded_file($img['tmp_name'][0], $pathImage)) {
                         //Si l'avatar n'est pas vide

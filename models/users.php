@@ -124,6 +124,9 @@ class Users
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = false;
+            if ($e->getCode() == 23000) {
+                echo '<script>alert("Ce compte est déjà existant")</script>';
+            }
             return $e->getCode();
         }
         //Sortie

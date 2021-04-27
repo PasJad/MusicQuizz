@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `musiques` (
   PRIMARY KEY (`IdMusique`),
   KEY `FK_TYPE_ID` (`IdType`),
   CONSTRAINT `FK_TYPE_ID` FOREIGN KEY (`IdType`) REFERENCES `typemusiques` (`IdType`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table contenant les musiques (image ou mp3)';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table contenant les musiques (image ou mp3)';
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `user_parametres` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
-INSERT INTO `users` (`IdUser`, `Nom`, `Pseudo`, `Email`, `Mdp`, `Avatar`, `Statut`) VALUES (1, 'Tn3', 'Jad', 'Admin@admin.com', '$2y$10$1ePeuWcUqV158WhT9YPdKeWLKiZ4OAyldcBCjl9/y/vdOj5X14Xdm', './user/img/60825e137ed96.jpg', 1);
+INSERT INTO `users` (`IdUser`, `Nom`, `Pseudo`, `Email`, `Mdp`, `Avatar`, `Statut`) VALUES (1, NULL, 'admin', 'admin@admin.com', '$2y$10$MxL47OkybOX5dvhhugHCKukySu43BF3zLhtDfdXbNvngOi20DoTCm', './user/img/default.jpg', 1);
 CREATE USER 'QuizzMan'@'localhost' IDENTIFIED BY 'dOKa1iLeceke54CA7Ohi3u7EPEGE3E';
 GRANT USAGE ON *.* TO 'QuizzMan'@'localhost';
 GRANT EXECUTE, SELECT, SHOW VIEW, ALTER, ALTER ROUTINE, CREATE, CREATE ROUTINE, CREATE TEMPORARY TABLES, CREATE VIEW, DELETE, DROP, EVENT, INDEX, INSERT, REFERENCES, TRIGGER, UPDATE, LOCK TABLES  ON `musicquizz`.* TO 'QuizzMan'@'localhost' WITH GRANT OPTION;

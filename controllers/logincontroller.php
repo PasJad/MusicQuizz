@@ -27,7 +27,7 @@ if ($action == "connexion") {
         $mail = strtolower($mail);
         $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
         if (!empty($mail) && !empty($mdp)) {
-            $ctrll->Connexion($mail, $mdp);
+            $ctrll->connexion($mail, $mdp);
         }
     }
 }
