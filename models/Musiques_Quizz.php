@@ -3,7 +3,7 @@
   * Nom : Tayan
   * Prénom : Jad
   * Ecole : CFPT-Informatique
-  * Date : 23.04.2021
+  * Date : 27.04.2021
   * Projet : TPI 2021
   * Fichier : Musiques_Quizz.php
   */
@@ -18,7 +18,7 @@ class Musiques_Quizz
      * @param [int] $IdQuizz
      * @return bool
      */
-    public function add($IdMusique, $IdQuizz)
+    public function add($idMusique, $idQuizz)
     {
         //Initialisation
         static $ps = null;
@@ -30,8 +30,8 @@ class Musiques_Quizz
         }
         //Try catch pour vérifier que la requête c'est bien executé
         try {
-            $ps->bindParam(':IdMusique', $IdMusique, PDO::PARAM_INT);
-            $ps->bindParam(':IdQuizz', $IdQuizz, PDO::PARAM_INT);
+            $ps->bindParam(':IdMusique', $idMusique, PDO::PARAM_INT);
+            $ps->bindParam(':IdQuizz', $idQuizz, PDO::PARAM_INT);
             $flag = $ps->execute();
         } catch (PDOException $e) {
             $flag = false;
