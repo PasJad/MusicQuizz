@@ -106,7 +106,11 @@ CREATE TABLE IF NOT EXISTS `user_parametres` (
 -- Les données exportées n'étaient pas sélectionnées.
 
 INSERT INTO `users` (`IdUser`, `Nom`, `Pseudo`, `Email`, `Mdp`, `Avatar`, `Statut`) VALUES (1, 'Tn3', 'Jad', 'Admin@admin.com', '$2y$10$1ePeuWcUqV158WhT9YPdKeWLKiZ4OAyldcBCjl9/y/vdOj5X14Xdm', './user/img/60825e137ed96.jpg', 1);
-
+CREATE USER 'QuizzMan'@'localhost' IDENTIFIED BY 'dOKa1iLeceke54CA7Ohi3u7EPEGE3E';
+GRANT USAGE ON *.* TO 'QuizzMan'@'localhost';
+GRANT EXECUTE, SELECT, SHOW VIEW, ALTER, ALTER ROUTINE, CREATE, CREATE ROUTINE, CREATE TEMPORARY TABLES, CREATE VIEW, DELETE, DROP, EVENT, INDEX, INSERT, REFERENCES, TRIGGER, UPDATE, LOCK TABLES  ON `musicquizz`.* TO 'QuizzMan'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+SHOW GRANTS FOR 'QuizzMan'@'localhost';
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
